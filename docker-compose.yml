@@ -1,0 +1,9 @@
+version: "3"
+services:
+  api:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile
+      context: ./stream
+    ports:
+      - "8090:8090"
