@@ -1,9 +1,45 @@
 version: "3"
 services:
+  cloud-sql-proxy:
+    image: gcr.io/cloudsql-docker/gce-proxy:1.11
+    command: /cloud_sql_proxy -instances=carbon-poet-280902:asia-northeast3:groove=tcp:0.0.0.0:3307
+    volumes:
+    - ./config:/root/.config
+    environment:
+    - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/storage-sql.json
+    ports:
+    - "3307:3307"
   api:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    ports:
+      - "8080:8080"
+    env_file: ./config/.env_docker_compose
+    depends_on:
+      - cloud-sql-proxy
+  stream:
     stdin_open: true
     build:
       dockerfile: Dockerfile
       context: ./stream
     ports:
       - "8090:8090"
+    env_file: ./config/.env_docker_compose
+  fileupload:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile
+      context: ./fileupload
+    ports:
+      - "8100:8100"
+    env_file: ./config/.env_docker_compose
+  stream:
+    stdin_open: true
+    image: alfg/nginx-rtmp
+    ports:
+      - "8090:80"
+    volumes:
+      - ./stream/nginx.conf:/etc/nginx/nginx.conf.template
+      - ./stream/samples:/hls
