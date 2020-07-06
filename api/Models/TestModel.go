@@ -3,7 +3,7 @@ package Models
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"github.com/yeomko22/groove/api/Config"
+	"github.com/yeomko22/groove/api/Network"
 )
 
 type Test struct {
@@ -13,21 +13,21 @@ type Test struct {
 }
 
 func GetAllTest(test *[]Test) (err error) {
-	if err = Config.DB.Find(test).Error; err != nil {
+	if err = Network.DB.Find(test).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 func GetTestByID(test *Test, id string) (err error) {
-	if err = Config.DB.Where("id = ?", id).First(test).Error; err != nil {
+	if err = Network.DB.Where("id = ?", id).First(test).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 func CreateTest(test *Test) (err error) {
-	if err = Config.DB.Create(test).Error; err != nil {
+	if err = Network.DB.Create(test).Error; err != nil {
 		return err
 	}
 	return nil
@@ -35,11 +35,11 @@ func CreateTest(test *Test) (err error) {
 
 func UpdateTest(test *Test, id string) (err error) {
 	fmt.Println(test)
-	Config.DB.Save(test)
+	Network.DB.Save(test)
 	return nil
 }
 
 func DeleteTest(test *Test, id string) (err error) {
-	Config.DB.Where("id = ?", id).Delete(test)
+	Network.DB.Where("id = ?", id).Delete(test)
 	return nil
 }
