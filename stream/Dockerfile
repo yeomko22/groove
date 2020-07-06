@@ -4,11 +4,11 @@ WORKDIR /app
 COPY go.mod .
 RUN go mod download
 COPY main.go .
-RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-s' -o soundcloud-stream .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-s' -o groove-stream .
 
 FROM alpine:3.7
 RUN apk update && apk add --no-cache bind-tools
 WORKDIR /app
-COPY --from=builder /app/soundcloud-stream .
+COPY --from=builder /app/groove-stream .
 COPY ./samples ./samples
-CMD ["./soundcloud-stream"]
+CMD ["./groove-stream"]

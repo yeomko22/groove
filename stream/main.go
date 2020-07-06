@@ -10,8 +10,7 @@ func main() {
 	const songDir = "samples"
 	const port = 8090
 	http.Handle("/", addHeaders(http.FileServer(http.Dir(songDir))))
-	fmt.Printf("Starting server on %v\n", port)
-	log.Printf("Serving %s on HTTP port: %v\n", songDir, port)
+	log.Println("groove stream server runs on port:", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
 }
 
