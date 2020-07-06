@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       hello groove
-      <ReactHLS url={"http://localhost:8090/sample2/playlist.m3u8"} />
+      <ReactHLS url={"http://localhost:8090/hls/sample2/playlist.m3u8"} />
     </div>
   );
 }
