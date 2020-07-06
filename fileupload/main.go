@@ -46,7 +46,7 @@ func hashFileName(fileName string) string {
 
 func healthcheck(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"status":   "live",
+		"status": "live",
 	})
 }
 
@@ -93,6 +93,7 @@ func convertHls(fileNameHash, uploadPath, saveDir string) {
 
 func main() {
 	r := setupRouter()
+	gin.SetMode(gin.ReleaseMode)
 	r.MaxMultipartMemory = 10 << 20 // 8 MiB
 	r.Run(":8100")
 	log.Println("file upload server runs at port 8100")
