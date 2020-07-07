@@ -1,10 +1,10 @@
 package Controllers
 
 import (
-"fmt"
-"net/http"
-"github.com/gin-gonic/gin"
-"github.com/yeomko22/groove/api/Models"
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/yeomko22/groove/api/Models"
+	"net/http"
 )
 
 func GetTests(c *gin.Context) {

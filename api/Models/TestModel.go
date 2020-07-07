@@ -8,8 +8,8 @@ import (
 
 type Test struct {
 	gorm.Model
-	Num              int   `gorm:"type:int"`
-	Name             string `gorm:"type:varchar(50)"`
+	Num  int    `gorm:"type:int"`
+	Name string `gorm:"type:varchar(50)"`
 }
 
 func GetAllTest(test *[]Test) (err error) {
