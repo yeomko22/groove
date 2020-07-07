@@ -19,18 +19,19 @@ func setupRouter() *gin.Engine {
 	r := gin.Default()
 	r.GET("/", healthcheck)
 	r.POST("/mp3", uploadMp3)
+	r.POST("/file", uploadFileWithPath)
 	return r
 }
 
-func getNfsDir() string {
-	nfsDir := os.Getenv("GROOVE_NFS_DIR")
-	if nfsDir == "" {
-		nfsDir, _ = filepath.Abs("./tmp")
-		if _, err := os.Stat(nfsDir); os.IsNotExist(err) {
-			os.Mkdir(nfsDir, os.ModePerm)
+func getHlsDir() string {
+	hlsDir := os.Getenv("GROOVE_HLS_DIR")
+	if hlsDir == "" {
+		hlsDir, _ = filepath.Abs("./tmp")
+		if _, err := os.Stat(hlsDir); os.IsNotExist(err) {
+			os.Mkdir(hlsDir, os.ModePerm)
 		}
 	}
-	return nfsDir
+	return hlsDir
 }
 
 func curTimeStr() string {
@@ -59,7 +60,7 @@ func uploadMp3(c *gin.Context) {
 	}
 	fileName := filepath.Base(file.Filename)
 	fileNameHash := hashFileName(fileName)
-	saveDir := getNfsDir() + "/" + fileNameHash
+	saveDir := getHlsDir() + "/" + fileNameHash
 	os.Mkdir(saveDir, os.ModePerm)
 
 	uploadPath := saveDir + "/" + fileNameHash + ".mp3"
@@ -89,6 +90,28 @@ func convertHls(fileNameHash, uploadPath, saveDir string) {
 		return
 	}
 	log.Println("Result: " + out.String())
+}
+
+func uploadFileWithPath(c *gin.Context) {
+	file, err := c.FormFile("file")
+	if err != nil {
+		c.String(http.StatusBadRequest, fmt.Sprintf("get form err: %s", err.Error()))
+		return
+	}
+	saveDir := c.Request.FormValue("dir")
+	if _, err := os.Stat(saveDir); os.IsNotExist(err) {
+		os.Mkdir(saveDir, os.ModePerm)
+	}
+	savePath := saveDir + "/" + file.Filename
+	fmt.Println(savePath)
+	if err := c.SaveUploadedFile(file, savePath); err != nil {
+		c.String(http.StatusBadRequest, fmt.Sprintf("upload file err: %s", err.Error()))
+		return
+	}
+	c.JSON(200, gin.H{
+		"status":   "posted",
+		"filehash": "save file at " + savePath,
+	})
 }
 
 func main() {
