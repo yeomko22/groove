@@ -6,8 +6,7 @@ metadata:
 data:
   GROOVE_HLS_DIR: /hls
   GROOVE_DBHOST: localhost
-  GROOVE_DBPORT: 3306
+  GROOVE_DBPORT: "3306"
   GROOVE_DBUSER: groove
-  GROOVE_DBPASSWORD: groove123#$%
   GROOVE_DBNAME: dev
   GIN_MODE: release
