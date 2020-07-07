@@ -2,20 +2,22 @@ package Models
 
 import (
 	"fmt"
+	"github.com/jinzhu/gorm"
 	"github.com/yeomko22/groove/api/Network"
 )
 
 type User struct {
-	UserId               uint   `gorm:"unique;type:varchar(50)"`
-	UserName             string `gorm:"type:varchar(50)"`
-	UserFullName         string `gorm:"type:varchar(50)"`
-	UserDescription      string `gorm:"type:text"`
-	UserCountry          string `gorm:"type:varchar(50)"`
-	UserCity             string `gorm:"type:varchar(50)"`
-	UserProfileOrg       string `gorm:"type:varchar(1024)"`
-	UserProfileThumbnail string `gorm:"type:varchar(1024)"`
-	UserBanner           string `gorm:"type:varchar(1024)"`
-	UserSid              int    `gorm:"type:int"`
+	gorm.Model
+	UserId               uint   `gorm:"unique;type:varchar(50);"`
+	UserName             string `gorm:"type:varchar(50);default:''"`
+	UserFullName         string `gorm:"type:varchar(50);default:''"`
+	UserDescription      string `gorm:"type:varchar(1024);default:''"`
+	UserCountry          string `gorm:"type:varchar(50);default:''"`
+	UserCity             string `gorm:"type:varchar(50);default:''"`
+	UserProfileOrg       string `gorm:"type:varchar(1024);default:''"`
+	UserProfileThumbnail string `gorm:"type:varchar(1024);default:''"`
+	UserBanner           string `gorm:"type:varchar(1024);default:''"`
+	UserSid              int    `gorm:"unique;type:int"`
 }
 
 func GetAllUsers(user *[]User) (err error) {
@@ -48,8 +50,4 @@ func UpdateUser(user *User, id string) (err error) {
 func DeleteUser(user *User, id string) (err error) {
 	Network.DB.Where("id = ?", id).Delete(user)
 	return nil
-}
-
-func (b *User) TableName() string {
-	return "user"
 }

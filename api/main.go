@@ -5,12 +5,10 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	"github.com/yeomko22/groove/api/Network"
 	"github.com/yeomko22/groove/api/Models"
+	"github.com/yeomko22/groove/api/Network"
 	"github.com/yeomko22/groove/api/Routes"
 )
-
-var err error
 
 func main() {
 	dbconfig, err := Network.BuildDBConfig()
@@ -23,6 +21,8 @@ func main() {
 	}
 	defer Network.DB.Close()
 	Network.DB.AutoMigrate(&Models.Test{})
+	Network.DB.AutoMigrate(&Models.User{})
+	Network.DB.AutoMigrate(&Models.Track{})
 	r := Routes.SetUpRouter()
 	r.Run(":8080")
 	log.Println("groove api runs on port 8080")
