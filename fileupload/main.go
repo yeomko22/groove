@@ -77,9 +77,9 @@ func uploadMp3(c *gin.Context) {
 
 func convertHls(fileNameHash, uploadPath, saveDir string) {
 	outputFormat := saveDir + "/segment%04d.ts"
-	m3u8_path := saveDir + "/playlist.m3u8"
+	m3u8Path := saveDir + "/playlist.m3u8"
 	cmd := exec.Command("ffmpeg", "-i", uploadPath, "-c:a", "libmp3lame", "-b:a", "128k",
-		"-f", "segment", "-segment_time", "30", "-segment_list", m3u8_path, "-segment_format", "mpegts", outputFormat)
+		"-f", "segment", "-segment_time", "30", "-segment_list", m3u8Path, "-segment_format", "mpegts", outputFormat)
 	var out bytes.Buffer
 	var stderr bytes.Buffer
 	cmd.Stdout = &out
