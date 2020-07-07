@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fileupload-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: fileupload
+  ports:
+    - port: 8100
+      targetPort: 8100
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fileupload-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: fileupload
+  template:
+    metadata:
+      labels:
+        component: fileupload
+    spec:
+      containers:
+      - name: fileupload
+        image: yeomko/groove-fileupload
+        ports:
+        - containerPort: 8100
+        volumeMounts:
+        - mountPath: /hls
+          name: nfs-vol
+        env:
+        - name: GROOVE_HLS_DIR
+          valueFrom:
+            configMapKeyRef:
+              name: config-dev
+              key: GROOVE_HLS_DIR
+      volumes:
+      - name : nfs-vol
+        nfs:
+          server: nfs-service.default.svc.cluster.local
+          path: /

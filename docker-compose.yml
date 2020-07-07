@@ -25,8 +25,9 @@ services:
       dockerfile: Dockerfile
       context: ./stream
     ports:
-      - "8090:8090"
-    env_file: ./config/.env_docker_compose
+      - "8090:80"
+    volumes:
+      - ./stream/samples:/hls
   fileupload:
     stdin_open: true
     build:
@@ -35,11 +36,4 @@ services:
     ports:
       - "8100:8100"
     env_file: ./config/.env_docker_compose
-  stream:
-    stdin_open: true
-    image: alfg/nginx-rtmp
-    ports:
-      - "8090:80"
-    volumes:
-      - ./stream/nginx.conf:/etc/nginx/nginx.conf.template
-      - ./stream/samples:/hls
+  
