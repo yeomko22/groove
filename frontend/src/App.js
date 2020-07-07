@@ -1,14 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import ReactHLS from 'react-hls';
+import { Switch, Route } from 'react-router-dom';
 
+// "http://localhost:8090/hls/sample2/playlist.m3u8"
 
 function App() {
   return (
     <div className="App">
-      hello groove
-      <ReactHLS url={"http://localhost:8090/hls/sample2/playlist.m3u8"} />
+      <Switch>
+        <Route path="/:user/:music">음악</Route>
+        <Route path="/:user">트랙</Route>
+        <Route path="/">메인</Route>
+      </Switch>
     </div>
   );
 }
