@@ -1,10 +1,10 @@
 import React from 'react';
-import Navigation from '../Navigation/Navigation';
+import MusicModuleList from './MusicModuleList';
 
 const Main = () => {
   return (
-    <div>
-      <Navigation />
+    <div class="main">
+      <MusicModuleList />
     </div>
   );
 };

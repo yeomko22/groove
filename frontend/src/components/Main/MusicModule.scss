@@ -1,0 +1,47 @@
+$color-red: #f00;
+$color-green: #0f0;
+$color-blue: #00f;
+$color-dark: #333;
+$color-light: #eee;
+
+$font-size-mid: 1.2rem;
+$font-size-small: 0.8rem;
+
+.main {
+    width: 70%;
+    margin: 0 auto;
+}
+
+li {
+    list-style: none;
+}
+
+.musicmodule {
+    font-family: 'Nanum Gothic', sans-serif;
+    margin: 1rem auto 0;
+
+    &__title {
+        text-align: left;
+        margin: 0 1rem;
+    }
+
+    &__itemlist {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    &__item {
+        padding: 1rem;
+        transition: all 0.6s;
+        text-align: left;
+
+        &__image {
+            border: 1px solid $color-light;
+            width: 10rem;
+        }
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
