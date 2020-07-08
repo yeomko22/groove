@@ -1,0 +1,70 @@
+$color-red: #f00;
+$color-green: #0f0;
+$color-blue: #00f;
+$color-dark: #333;
+$color-light: #eee;
+
+$font-size-mid: 1.2rem;
+$font-size-small: 0.8rem;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-container {
+    width: 100%;
+    background: linear-gradient(217deg, rgba($color-red, 0.8), rgba($color-red, 0) 70.71%), linear-gradient(127deg, rgba($color-green, 0.8), rgba($color-green, 0) 70.71%), linear-gradient(336deg, rgba($color-blue, 0.8), rgba($color-blue, 0) 70.71%);
+}
+
+.nav {
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &__title {
+        margin: 0;
+        padding: 0;
+    }
+
+    &__search {
+        flex-grow: 2;
+        margin: 0.3rem 1rem;
+
+        input {
+            border-radius: 100rem;
+            border: 1.4px solid $color-dark;
+            width: 100%;
+            padding: 0.3rem 1rem;
+            box-sizing: border-box;
+            font-size: $font-size-mid;
+        }
+    }
+}
+
+.btn {
+    background-color: transparent;
+    border: 1.5px solid $color-light;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    color: $color-light;
+    outline: none;
+    font-size: $font-size-small;
+    margin: 0 1rem;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    &__image {
+        width: 2rem;
+        clip-path: circle();
+    }
+
+    &__username {
+        color: $color-light;
+        padding: 0 1rem;
+    }
+}
