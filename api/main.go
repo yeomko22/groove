@@ -23,6 +23,9 @@ func main() {
 	Network.DB.AutoMigrate(&Models.Test{})
 	Network.DB.AutoMigrate(&Models.User{})
 	Network.DB.AutoMigrate(&Models.Track{})
+	Network.DB.AutoMigrate(&Models.Tag{})
+	Network.DB.Model(&Models.Tag{}).AddForeignKey("tag_track_id", "tracks(track_id)", "RESTRICT", "RESTRICT")
+
 	r := Routes.SetUpRouter()
 	r.Run(":8080")
 	log.Println("groove api runs on port 8080")
