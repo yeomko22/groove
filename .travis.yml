@@ -1,4 +1,4 @@
-language: ruby
+language: generic
 sudo: required
 services:
   - docker
@@ -20,3 +20,4 @@ deploy:
   script: bash ./scripts/deploy.sh
   on:
     branch: dev
+  skip_cleanup: true
