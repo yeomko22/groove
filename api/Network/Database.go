@@ -30,7 +30,6 @@ func BuildDBConfig() (*DBConfig, error) {
 	}
 	dbportNum, err := strconv.Atoi(dbport)
 	if err != nil {
-		fmt.Println(dbhost, dbport, dbuser, dbpassword, dbname, dbportNum, err)
 		return nil, errors.New("invalid dbport")
 	}
 	dbConfig := DBConfig{

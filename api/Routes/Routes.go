@@ -9,25 +9,32 @@ func SetUpRouter() *gin.Engine {
 	r := gin.Default()
 	v1 := r.Group("/api")
 	{
-		grp0 := v1.Group("/")
+		v1.Group("/").GET("/", Controllers.GetHealth)
+		grpTest := v1.Group("/test")
 		{
-			grp0.GET("/", Controllers.GetHealth)
+			grpTest.GET("/", Controllers.GetTests)
+			grpTest.POST("/", Controllers.CreateTest)
+			grpTest.GET("/:id", Controllers.GetTestByID)
+			grpTest.PUT("/:id", Controllers.UpdateTest)
+			grpTest.DELETE("/:id", Controllers.DeleteTest)
 		}
-		grp1 := v1.Group("/test")
+		grpUser := v1.Group("/user")
 		{
-			grp1.GET("/", Controllers.GetTests)
-			grp1.POST("/", Controllers.CreateTest)
-			grp1.GET("/:id", Controllers.GetTestByID)
-			grp1.PUT("/:id", Controllers.UpdateTest)
-			grp1.DELETE("/:id", Controllers.DeleteTest)
+			grpUser.GET("/", Controllers.GetUsers)
+			grpUser.POST("/", Controllers.CreateUser)
+			grpUser.GET("/:id", Controllers.GetUserByID)
+			grpUser.PUT("/:id", Controllers.UpdateUser)
+			grpUser.DELETE("/:id", Controllers.DeleteUser)
 		}
-		grp2 := v1.Group("/user")
+		grpTrack := v1.Group("/tracks")
 		{
-			grp2.GET("/", Controllers.GetUsers)
-			grp2.POST("/", Controllers.CreateUser)
-			grp2.GET("/:id", Controllers.GetUserByID)
-			grp2.PUT("/:id", Controllers.UpdateUser)
-			grp2.DELETE("/:id", Controllers.DeleteUser)
+			grpTrack.GET("/genres", Controllers.GetTrackGenres)
+			grpTrack.GET("/genre/:query", Controllers.GetTrackByGenre)
+			grpTrack.GET("/tag/:query", Controllers.GetTrackByTag)
+		}
+		grpTag := v1.Group("/tags")
+		{
+			grpTag.GET("/", Controllers.GetTags)
 		}
 	}
 	return r

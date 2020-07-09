@@ -34,7 +34,6 @@ func CreateTest(test *Test) (err error) {
 }
 
 func UpdateTest(test *Test, id string) (err error) {
-	fmt.Println(test)
 	Network.DB.Save(test)
 	return nil
 }
