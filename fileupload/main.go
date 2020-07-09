@@ -17,9 +17,12 @@ import (
 
 func setupRouter() *gin.Engine {
 	r := gin.Default()
-	r.GET("/", healthcheck)
-	r.POST("/mp3", uploadMp3)
-	r.POST("/file", uploadFileWithPath)
+	grp1 := r.Group("/upload")
+	{
+		grp1.GET("/", healthcheck)
+		grp1.POST("/mp3", uploadMp3)
+		grp1.POST("/file", uploadFileWithPath)
+	}
 	return r
 }
 
