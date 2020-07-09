@@ -1,7 +1,6 @@
 package Models
 
 import (
-	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/yeomko22/groove/api/Network"
 )
