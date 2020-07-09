@@ -1,7 +1,6 @@
 package Controllers
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/yeomko22/groove/api/Models"
 	"net/http"
@@ -22,7 +21,6 @@ func CreateTest(c *gin.Context) {
 	c.BindJSON(&test)
 	err := Models.CreateTest(&test)
 	if err != nil {
-		fmt.Println(err.Error())
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
 		c.JSON(http.StatusOK, test)

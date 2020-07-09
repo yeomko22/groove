@@ -42,7 +42,6 @@ func CreateUser(user *User) (err error) {
 }
 
 func UpdateUser(user *User, id string) (err error) {
-	fmt.Println(user)
 	Network.DB.Save(user)
 	return nil
 }
