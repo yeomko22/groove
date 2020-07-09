@@ -21,7 +21,7 @@ spec:
         backend:
           serviceName: fileupload-cluster-ip-service
           servicePort: 8100
-      - path: /stream
+      - path: /hls
         backend:
           serviceName: stream-cluster-ip-service
           servicePort: 80
