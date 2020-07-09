@@ -1,6 +1,11 @@
 # get git commit hashcode
 export SHA=$(git rev-parse HEAD)
 
+# frontend build and push
+docker build -t yeomko/groove-frontend:latest -t yeomko/groove-frontend:$SHA ./frontend
+docker push yeomko/groove-frontend:latest
+docker push yeomko/groove-frontend:$SHA
+
 # api build and push
 docker build -t yeomko/groove-api:latest -t yeomko/groove-api:$SHA ./api
 docker push yeomko/groove-api:latest
