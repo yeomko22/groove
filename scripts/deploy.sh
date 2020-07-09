@@ -22,6 +22,7 @@ docker push yeomko/groove-stream:latest
 docker push yeomko/groove-stream:$SHA
 
 kubectl apply -f k8s
+kubectl set image deployments/frontend-deployment stream=yeomko/groove-frontend:$SHA
 kubectl set image deployments/api-deployment api=yeomko/groove-api:$SHA
 kubectl set image deployments/fileupload-deployment fileupload=yeomko/groove-fileupload:$SHA
 kubectl set image deployments/stream-deployment stream=yeomko/groove-stream:$SHA
