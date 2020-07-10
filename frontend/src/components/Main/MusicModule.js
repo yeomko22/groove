@@ -4,7 +4,6 @@ import MusicModuleItemList from './MusicModuleItemList';
 import './MusicModule.scss';
 
 const MusicModule = ({ tag }) => {
-  const loadData = {};
   return (
     <li className="musicmodule">
       <MusicModuleTitle tag={tag} />

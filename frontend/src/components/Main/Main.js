@@ -3,7 +3,7 @@ import MusicModuleList from './MusicModuleList';
 
 const Main = () => {
   return (
-    <div class="main">
+    <div className="main">
       <MusicModuleList />
     </div>
   );
