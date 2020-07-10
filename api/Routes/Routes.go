@@ -28,6 +28,8 @@ func SetUpRouter() *gin.Engine {
 		}
 		grpTrack := v1.Group("/tracks")
 		{
+			grpTrack.GET("/newest", Controllers.GetTrackNewest)
+			grpTrack.GET("/hottest", Controllers.GetTrackHottest)
 			grpTrack.GET("/genres", Controllers.GetTrackGenres)
 			grpTrack.GET("/genre/:query", Controllers.GetTrackByGenre)
 			grpTrack.GET("/tag/:query", Controllers.GetTrackByTag)

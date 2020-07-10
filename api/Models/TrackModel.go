@@ -65,3 +65,27 @@ func GetTrackByTag(tracks *[]Track, query string) (err error) {
 	}
 	return nil
 }
+
+func GetTrackNewest(tracks *[]Track) (err error) {
+	err = Network.DB.
+		Order("created_at desc").
+		Limit(10).
+		Find(tracks).
+		Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func GetTrackHottest(tracks *[]Track) (err error) {
+	err = Network.DB.
+		Order("track_likes_count desc").
+		Limit(10).
+		Find(tracks).
+		Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
