@@ -4,10 +4,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/yeomko22/groove/api/Models"
 	"net/http"
+	"strings"
 )
 
 func GetTrackByGenre(c *gin.Context) {
 	query := c.Param("query")
+	query = strings.ReplaceAll(query, "+", " ")
 	var tracks []Models.Track
 	err := Models.GetTrackByGenre(&tracks, query)
 	if err != nil {
@@ -29,6 +31,7 @@ func GetTrackGenres(c *gin.Context) {
 
 func GetTrackByTag(c *gin.Context) {
 	query := c.Param("query")
+	query = strings.ReplaceAll(query, "+", " ")
 	var tracks []Models.Track
 	err := Models.GetTrackByTag(&tracks, query)
 	if err != nil {
