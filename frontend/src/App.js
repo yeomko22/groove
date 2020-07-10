@@ -1,8 +1,9 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import Main from './components/Main/Main';
 import Navigation from './components/Navigation/Navigation';
+import TrackMain from './components/Track/TrackMain';
 
 // "http://localhost:8090/hls/sample2/playlist.m3u8"
 
@@ -11,13 +12,17 @@ function App() {
     <div className="App">
       <Navigation />
 
-      <Switch>
-        <Route path="/:user/:music">음악</Route>
-        <Route path="/:user">트랙</Route>
-        <Route path="/">
-          <Main />
-        </Route>
-      </Switch>
+      <section className="section">
+        <Switch>
+          <Route path="/:user/:music">음악</Route>
+          <Route path="/:user">
+            <TrackMain />
+          </Route>
+          <Route path="/">
+            <Main />
+          </Route>
+        </Switch>
+      </section>
     </div>
   );
 }
