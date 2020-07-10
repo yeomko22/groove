@@ -40,3 +40,23 @@ func GetTrackByTag(c *gin.Context) {
 		c.JSON(http.StatusOK, tracks)
 	}
 }
+
+func GetTrackNewest(c *gin.Context) {
+	var tracks []Models.Track
+	err := Models.GetTrackNewest(&tracks)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, tracks)
+	}
+}
+
+func GetTrackHottest(c *gin.Context) {
+	var tracks []Models.Track
+	err := Models.GetTrackHottest(&tracks)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, tracks)
+	}
+}
