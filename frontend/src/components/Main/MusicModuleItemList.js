@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import MusicModuleItem from './MusicModuleItem';
+import axios from 'axios';
 
 const MusicModuleItemList = ({ tag }) => {
   const [musics, setMusics] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const nameURL = `https://jsonplaceholder.typicode.com/users`;
-      const res = await fetch(nameURL);
-      const data = await res.json();
-      setMusics(data);
-    })();
+    const loadMusics = async () => {
+      const nameURL = `http://34.64.252.200/api/tracks/genre/${tag}`;
+      const res = await axios(nameURL);
+      setMusics(res.data);
+    };
+    loadMusics();
   }, []);
 
   if (musics.length == 0) return <div>없음</div>;
   return (
     <ul className="musicmodule__itemlist">
       {musics.map((music) => (
-        <MusicModuleItem key={music.name} tag={tag} music={music} />
+        <MusicModuleItem key={music.TrackId} musicObj={music} />
       ))}
     </ul>
   );
