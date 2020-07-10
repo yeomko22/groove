@@ -1,13 +1,13 @@
 package main
 
 import (
-	"log"
-
+	"github.com/gin-contrib/cors"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"github.com/yeomko22/groove/api/Models"
 	"github.com/yeomko22/groove/api/Network"
 	"github.com/yeomko22/groove/api/Routes"
+	"log"
 )
 
 func main() {
@@ -27,6 +27,7 @@ func main() {
 	Network.DB.Model(&Models.Tag{}).AddForeignKey("tag_track_id", "tracks(track_id)", "RESTRICT", "RESTRICT")
 
 	r := Routes.SetUpRouter()
+	r.Use(cors.Default())
 	r.Run(":8080")
 	log.Println("groove api runs on port 8080")
 }
