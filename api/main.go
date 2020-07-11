@@ -10,6 +10,14 @@ import (
 	"log"
 )
 
+// @title Groove API Swagger
+// @version 1.0
+// @description Groove 프로젝트 API swagger 문서입니다.
+// @contact.name API 개발자 - 김형준
+// @contact.email hjkim2246@gmail.com
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @BasePath /api
 func main() {
 	dbconfig, err := Network.BuildDBConfig()
 	if err != nil {

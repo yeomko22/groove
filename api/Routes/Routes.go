@@ -2,13 +2,18 @@ package Routes
 
 import (
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	swaggerFiles "github.com/swaggo/files"
+	_ "github.com/yeomko22/groove/api/docs"
 	"github.com/yeomko22/groove/api/Controllers"
 )
+
 
 func SetUpRouter() *gin.Engine {
 	r := gin.Default()
 	v1 := r.Group("/api")
 	{
+		v1.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		v1.Group("/").GET("/", Controllers.GetHealth)
 		grpTest := v1.Group("/test")
 		{
