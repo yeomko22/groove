@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+
 func GetTests(c *gin.Context) {
 	var test []Models.Test
 	err := Models.GetAllTest(&test)
