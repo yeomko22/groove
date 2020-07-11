@@ -7,7 +7,7 @@ import (
 
 type User struct {
 	gorm.Model
-	UserId               uint   `gorm:"unique;type:varchar(50);"`
+	UserId               string `gorm:"unique;type:varchar(50);"`
 	UserName             string `gorm:"type:varchar(50);default:''"`
 	UserFullName         string `gorm:"type:varchar(50);default:''"`
 	UserDescription      string `gorm:"type:varchar(1024);default:''"`
@@ -26,8 +26,12 @@ func GetAllUsers(user *[]User) (err error) {
 	return nil
 }
 
-func GetUserByID(user *User, id string) (err error) {
-	if err = Network.DB.Where("id = ?", id).First(user).Error; err != nil {
+func GetUserByID(user *User, userId string) (err error) {
+	err = Network.DB.
+		Where("user_id = ?", userId).
+		First(user).
+		Error
+	if err != nil {
 		return err
 	}
 	return nil

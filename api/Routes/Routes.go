@@ -23,16 +23,17 @@ func SetUpRouter() *gin.Engine {
 			grpUser.GET("/", Controllers.GetUsers)
 			grpUser.POST("/", Controllers.CreateUser)
 			grpUser.GET("/:id", Controllers.GetUserByID)
-			grpUser.PUT("/:id", Controllers.UpdateUser)
-			grpUser.DELETE("/:id", Controllers.DeleteUser)
 		}
 		grpTrack := v1.Group("/tracks")
 		{
+			grpTrack.GET("/id/:trackId", Controllers.GetTrackById)
 			grpTrack.GET("/newest", Controllers.GetTrackNewest)
 			grpTrack.GET("/hottest", Controllers.GetTrackHottest)
 			grpTrack.GET("/genres", Controllers.GetTrackGenres)
 			grpTrack.GET("/genre/:query", Controllers.GetTrackByGenre)
 			grpTrack.GET("/tag/:query", Controllers.GetTrackByTag)
+			grpTrack.GET("/user/:userId", Controllers.GetTrackByUser)
+			grpTrack.PUT("/increase", Controllers.IncreaseTrackField)
 		}
 		grpTag := v1.Group("/tags")
 		{
