@@ -64,6 +64,37 @@ definitions:
           $ref: '#/definitions/Models.Track'
         type: array
     type: object
+  Models.User:
+    properties:
+      userBanner:
+        type: string
+      userCity:
+        type: string
+      userCountry:
+        type: string
+      userDescription:
+        type: string
+      userFullName:
+        type: string
+      userId:
+        type: string
+      userName:
+        type: string
+      userProfileOrg:
+        type: string
+      userProfileThumbnail:
+        type: string
+      userSid:
+        type: integer
+    type: object
+  Models.UserResponse:
+    properties:
+      code:
+        type: integer
+      user:
+        $ref: '#/definitions/Models.User'
+        type: object
+    type: object
 info:
   contact:
     email: hjkim2246@gmail.com
@@ -215,4 +246,20 @@ paths:
             $ref: '#/definitions/Models.TrackResponse'
       tags:
       - tracks
+  /users/:userId:
+    get:
+      description: userid 값에 해당하는 유저 정보를 읽어옴
+      parameters:
+      - description: userId
+        in: path
+        name: userId
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Models.UserResponse'
+      tags:
+      - users
 swagger: "2.0"
