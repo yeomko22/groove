@@ -23,7 +23,7 @@ func SetUpRouter() *gin.Engine {
 			grpTest.PUT("/:id", Controllers.UpdateTest)
 			grpTest.DELETE("/:id", Controllers.DeleteTest)
 		}
-		grpUser := v1.Group("/user")
+		grpUser := v1.Group("/users")
 		{
 			grpUser.GET("/", Controllers.GetUsers)
 			grpUser.POST("/", Controllers.CreateUser)

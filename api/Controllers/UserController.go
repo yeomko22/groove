@@ -28,6 +28,11 @@ func CreateUser(c *gin.Context) {
 	}
 }
 
+// @Router /users/:userId [get]
+// @Description userid 값에 해당하는 유저 정보를 읽어옴
+// @Param userId path string true "userId"
+// @Success 200 {object} Models.UserResponse
+// @Tags users
 func GetUserByID(c *gin.Context) {
 	userId := c.Params.ByName("id")
 	var user Models.User
@@ -35,7 +40,8 @@ func GetUserByID(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusOK,
+			Models.NewUserResponse(http.StatusOK, user))
 	}
 }
 

@@ -249,6 +249,31 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/users/:userId": {
+            "get": {
+                "description": "userid 값에 해당하는 유저 정보를 읽어옴",
+                "tags": [
+                    "users"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Models.UserResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -347,6 +372,53 @@ var doc = `{
                     "items": {
                         "$ref": "#/definitions/Models.Track"
                     }
+                }
+            }
+        },
+        "Models.User": {
+            "type": "object",
+            "properties": {
+                "userBanner": {
+                    "type": "string"
+                },
+                "userCity": {
+                    "type": "string"
+                },
+                "userCountry": {
+                    "type": "string"
+                },
+                "userDescription": {
+                    "type": "string"
+                },
+                "userFullName": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "userProfileOrg": {
+                    "type": "string"
+                },
+                "userProfileThumbnail": {
+                    "type": "string"
+                },
+                "userSid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Models.UserResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/Models.User"
                 }
             }
         }

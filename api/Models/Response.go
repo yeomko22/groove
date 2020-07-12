@@ -47,3 +47,15 @@ func NewTagsResponse(code int, tagCnts []TagCnt) TagsResponse {
 	response.TagCnts = tagCnts
 	return response
 }
+
+type UserResponse struct {
+	Code  int   `json:"code"`
+	User User `json:"user"`
+}
+
+func NewUserResponse(code int, user User) UserResponse {
+	var response UserResponse
+	response.Code = code
+	response.User = user
+	return response
+}
