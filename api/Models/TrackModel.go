@@ -9,20 +9,22 @@ import (
 
 type Track struct {
 	gorm.Model
-	TrackId               string `gorm:"unique;type:varchar(50);"`
-	TrackUserSid          string `gorm:"type:varchar(50)"`
-	TrackUserId           string `gorm:"type:varchar(50)"`
-	TrackUserName         string `gorm:"type:varchar(50)"`
-	TrackTitle            string `gorm:"type:varchar(255);default:''"`
-	TrackDescription      string `gorm:"type:varchar(4096);default:''"`
-	TrackDuration         int    `gorm:"type:int;default:0"`
-	TrackGenre            string `gorm:"type:varchar(50);default:''"`
-	TrackArtwork          string `gorm:"type:varchar(1024);default:''"`
-	TrackArtworkThumbnail string `gorm:"type:varchar(1024);default:''"`
-	TrackHls              string `gorm:"type:varchar(1024);default:''"`
-	TrackPermalink        string `gorm:"type:varchar(1024);default:''"`
-	TrackLikesCount       int    `gorm:"type:int;default:0"`
-	TrackPlaybackCount    int    `gorm:"type:int;default:0"`
+	TrackId                   string `gorm:"unique;type:varchar(50);"`
+	TrackUserSid              string `gorm:"type:varchar(50)"`
+	TrackUserId               string `gorm:"type:varchar(50)"`
+	TrackUserName             string `gorm:"type:varchar(50)"`
+	TrackTitle                string `gorm:"type:varchar(255);default:''"`
+	TrackDescription          string `gorm:"type:varchar(4096);default:''"`
+	TrackDuration             int    `gorm:"type:int;default:0"`
+	TrackGenre                string `gorm:"type:varchar(50);default:''"`
+	TrackArtwork              string `gorm:"type:varchar(1024);default:''"`
+	TrackArtworkThumbnail     string `gorm:"type:varchar(1024);default:''"`
+	TrackUserProfile          string `gorm:"type:varchar(1024);default:''"`
+	TrackUserProfileThumbnail string `gorm:"type:varchar(1024);default:''"`
+	TrackHls                  string `gorm:"type:varchar(1024);default:''"`
+	TrackPermalink            string `gorm:"type:varchar(1024);default:''"`
+	TrackLikesCount           int    `gorm:"type:int;default:0"`
+	TrackPlaybackCount        int    `gorm:"type:int;default:0"`
 }
 
 type Genre struct {

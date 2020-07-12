@@ -13,7 +13,7 @@ func NewTrackResponse(code int, track Track) TrackResponse {
 }
 
 type TracksResponse struct {
-	Code int       `json:"code"`
+	Code   int     `json:"code"`
 	Tracks []Track `json:"tracks"`
 }
 
@@ -25,7 +25,7 @@ func NewTracksResponse(code int, tracks []Track) TracksResponse {
 }
 
 type GenresResponse struct {
-	Code int       `json:"code"`
+	Code   int     `json:"code"`
 	Genres []Genre `json:"genres"`
 }
 
@@ -37,7 +37,7 @@ func NewGenresResponse(code int, genres []Genre) GenresResponse {
 }
 
 type TagsResponse struct {
-	Code int       `json:"code"`
+	Code    int      `json:"code"`
 	TagCnts []TagCnt `json:"tagcnts"`
 }
 
@@ -49,7 +49,7 @@ func NewTagsResponse(code int, tagCnts []TagCnt) TagsResponse {
 }
 
 type UserResponse struct {
-	Code  int   `json:"code"`
+	Code int  `json:"code"`
 	User User `json:"user"`
 }
 

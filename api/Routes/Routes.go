@@ -2,12 +2,11 @@ package Routes
 
 import (
 	"github.com/gin-gonic/gin"
-	ginSwagger "github.com/swaggo/gin-swagger"
 	swaggerFiles "github.com/swaggo/files"
-	_ "github.com/yeomko22/groove/api/docs"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/yeomko22/groove/api/Controllers"
+	_ "github.com/yeomko22/groove/api/docs"
 )
-
 
 func SetUpRouter() *gin.Engine {
 	r := gin.Default()
