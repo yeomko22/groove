@@ -38,8 +38,8 @@ export const categoryObject = {
   ],
   dawn: [
     ['tag', 'YELLA', 'Artist: YELLA'],
-    ['newest', '', 'Charts: Newest'],
     ['tag', 'mood', '새벽 감성 음악'],
+    ['newest', '', 'Charts: Newest'],
     ['genre', 'lofi', 'Lofi'],
     ['tag', 'study', 'Study'],
     ['tag', 'MonstaX', 'Artist: MontsaX'],
