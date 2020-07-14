@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MusicModuleItem from './MusicModuleItem';
-import { SERVER_IP } from '../../const';
+import { SERVER_IP } from '../../utils/const';
+import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react';
 import axios from 'axios';
 
 const MusicModuleItemList = ({ category, specificCategory }) => {
@@ -17,7 +18,8 @@ const MusicModuleItemList = ({ category, specificCategory }) => {
     loadMusics();
   }, [category, specificCategory]);
 
-  if (musics.length === 0) return <div>로딩중</div>;
+  if (musics.length === 0)
+    return <div className="musicmodule__loading">Loading ... </div>;
   return (
     <ul className="musicmodule__itemlist">
       {musics.map((music) => (
