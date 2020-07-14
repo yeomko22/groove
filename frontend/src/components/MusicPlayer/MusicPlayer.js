@@ -4,6 +4,7 @@ import './MusicPlayer.scss';
 import { SERVER_IP } from '../../utils/const';
 import Hls from 'hls.js';
 import MusicPlayerController from './MusicPlayerController';
+import MusicPlayerPlay from './MusicPlayerPlay';
 
 class MusicPlayer extends Component {
   constructor() {
