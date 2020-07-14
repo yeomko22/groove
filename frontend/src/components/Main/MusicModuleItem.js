@@ -4,10 +4,17 @@ import MusicModuleItemSpec from './MusicModuleItemSpec';
 import MusicModuleItemPlay from './MusicModuleItemPlay';
 
 const MusicModuleItem = ({ musicObj }) => {
-  const { TrackArtworkThumbnail, TrackTitle, TrackUserName } = musicObj;
+  const {
+    TrackArtwork,
+    TrackTitle,
+    TrackUserName,
+    TrackUserProfile,
+  } = musicObj;
   return (
     <li className="musicmodule__item">
-      <MusicModuleItemImage trackThumbnail={TrackArtworkThumbnail} />
+      <MusicModuleItemImage
+        artwork={TrackArtwork === '' ? TrackUserProfile : TrackArtwork}
+      />
       <MusicModuleItemPlay musicInfo={musicObj} />
       <MusicModuleItemSpec
         trackTitle={TrackTitle}
