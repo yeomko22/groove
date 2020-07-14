@@ -27,13 +27,6 @@ const MusicPlayer = () => {
     }
   }, [musicInfo.TrackHls]);
 
-  const togglePlay = () => {
-    if (play) audio.pause();
-    else audio.play();
-    setPlay(!play);
-    console.log(audio.currentTime);
-  };
-
   return (
     <div>
       <audio
@@ -41,7 +34,12 @@ const MusicPlayer = () => {
         ref={audioRef}
         style={{ position: 'fixed', top: '100px' }}
       ></audio>
-      <MusicPlayerController play={play} togglePlay={togglePlay} />
+      <MusicPlayerController
+        audio={audio}
+        play={play}
+        setPlay={setPlay}
+        TrackHls={TrackHls}
+      />
     </div>
   );
 };
