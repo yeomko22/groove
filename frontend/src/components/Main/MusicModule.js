@@ -3,11 +3,9 @@ import MusicModuleTitle from './MusicModuleTitle';
 import MusicModuleItemList from './MusicModuleItemList';
 import './MusicModule.scss';
 
-const MusicModule = ({ category, specificCategory }) => (
+const MusicModule = ({ category, specificCategory, title }) => (
   <li className="musicmodule">
-    <MusicModuleTitle
-      category={specificCategory === '' ? category : specificCategory}
-    />
+    <MusicModuleTitle title={title} />
     <MusicModuleItemList
       category={category}
       specificCategory={specificCategory}
