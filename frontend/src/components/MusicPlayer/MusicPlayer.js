@@ -14,6 +14,7 @@ class MusicPlayer extends Component {
       time: 0,
       duration: 0,
       trackHls: '',
+      musicInfo: {},
     };
     this.audioRef = React.createRef();
   }
@@ -62,19 +63,18 @@ class MusicPlayer extends Component {
         });
       }
       this.setState({ trackHls: TrackHls });
-    }
+      this.setState({ musicInfo: musicInfo });
 
-    const { play } = this.state;
-    if (play) audio.play();
-    else audio.pause();
+      const { play } = this.state;
+      if (play) audio.play();
+      else audio.pause();
+    }
   }
 
   render() {
     const audio = this.audioRef.current;
-    const { play, time, duration } = this.state;
-    const { music } = this.context;
-    const { musicInfo } = music;
-    const { TrackHls } = musicInfo;
+    const { play, time, duration, musicInfo } = this.state;
+    const { TrackHls } = this.context.music.musicInfo;
     return (
       <>
         <audio ref={this.audioRef}></audio>
@@ -86,10 +86,12 @@ class MusicPlayer extends Component {
           time={time}
           duration={duration}
           handleChangeTime={this.handleChangeTime}
+          musicInfo={musicInfo}
         />
       </>
     );
   }
 }
+
 MusicPlayer.contextType = MusicContext;
 export default MusicPlayer;

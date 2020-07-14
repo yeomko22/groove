@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import secToTimeFormat from '../../utils/secToTimeFormat';
-import MusicPlayerPlay from './MusicPlayerPlay';
+import MusicPlayerMusicInfo from './MusicPlayerMusicInfo';
+import MusicPlayerButtons from './MusicPlayerButtons';
+import MusicPlayerSide from './MusicPlayerSide';
 
 const MusicPlayerController = ({
   audio,
@@ -9,18 +10,13 @@ const MusicPlayerController = ({
   time,
   duration,
   handleChangeTime,
+  musicInfo,
 }) => {
   const sliderRef = useRef();
-  const slider = sliderRef.current;
   const [sliderPosition, setSliderPosition] = useState(0);
 
-  useEffect(() => {
-    if (slider !== null && slider !== undefined) {
-      setSliderPosition((time / duration) * 1000);
-    }
-  }, [time]);
-
   const hadleSliderChange = (e) => {
+    if (duration === 0 || isNaN(duration)) return;
     const position = e.target.value;
     setSliderPosition(position);
     handleChangeTime((position * duration) / 1000);
@@ -28,19 +24,24 @@ const MusicPlayerController = ({
 
   return (
     <div className="musiccontroller">
+      <input
+        className="musiccontroller__musicslider"
+        type="range"
+        ref={sliderRef}
+        min={0}
+        max={1000}
+        value={sliderPosition}
+        onChange={hadleSliderChange}
+      />
       <div className="musiccontroller__container">
-        <MusicPlayerPlay audio={audio} play={play} setPlay={setPlay} />
-        <span>{`${secToTimeFormat(time)}`}</span>
-        <input
-          className="musiccontroller__musicslider"
-          type="range"
-          ref={sliderRef}
-          min={0}
-          max={1000}
-          value={sliderPosition}
-          onChange={hadleSliderChange}
+        <MusicPlayerMusicInfo musicInfo={musicInfo} />
+        <MusicPlayerButtons
+          audio={audio}
+          play={play}
+          setPlay={setPlay}
+          isMusicSet={duration === 0 || isNaN(duration)}
         />
-        <span>{`${secToTimeFormat(duration)}`}</span>
+        <MusicPlayerSide time={time} duration={duration} />
       </div>
     </div>
   );

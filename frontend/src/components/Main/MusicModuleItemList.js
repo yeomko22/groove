@@ -15,9 +15,10 @@ const MusicModuleItemList = ({ category, specificCategory }) => {
       setMusics(tracks);
     };
     loadMusics();
-  }, []);
+  }, [category, specificCategory]);
 
-  if (musics.length === 0) return <div>로딩중</div>;
+  if (musics.length === 0)
+    return <div className="musicmodule__loading">Loading ... </div>;
   return (
     <ul className="musicmodule__itemlist">
       {musics.map((music) => (

@@ -3,7 +3,7 @@ import { MusicContext } from '../../context/MusicContext';
 import { FaPlayCircle } from 'react-icons/fa';
 
 const MusicModuleItemPlay = ({ musicInfo }) => {
-  const { music, musicDispatch } = useContext(MusicContext);
+  const { musicDispatch } = useContext(MusicContext);
   const handlePlay = () => {
     musicDispatch({ type: 'setMusic', musicInfo });
   };
