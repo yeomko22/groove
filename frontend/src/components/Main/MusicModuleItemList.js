@@ -15,7 +15,7 @@ const MusicModuleItemList = ({ category, specificCategory }) => {
       setMusics(tracks);
     };
     loadMusics();
-  }, []);
+  }, [category, specificCategory]);
 
   if (musics.length === 0) return <div>로딩중</div>;
   return (

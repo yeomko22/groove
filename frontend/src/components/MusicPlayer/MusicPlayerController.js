@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import MusicPlayerPlay from './MusicPlayerPlay';
 
 const MusicPlayerController = ({ audio, play, setPlay, TrackHls }) => {
@@ -19,16 +19,18 @@ const MusicPlayerController = ({ audio, play, setPlay, TrackHls }) => {
     if (minutes < 10) minutes = '0' + minutes;
     if (seconds < 10) seconds = '0' + seconds;
 
-    if (hours == '00') return minutes + ':' + seconds;
+    if (hours === '00') return minutes + ':' + seconds;
     return hours + ':' + minutes + ':' + seconds;
   };
 
-  const interval = setInterval(() => {
-    setTime(formatTime(audio?.currentTime));
-    setDuration(formatTime(audio?.duration));
-  }, 1000);
-  console.log(time);
-  if (!play) clearInterval(interval);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(formatTime(audio?.currentTime));
+      setDuration(formatTime(audio?.duration));
+    }, 1000);
+    console.log(interval);
+    if (!play) clearInterval(interval);
+  });
 
   return (
     <div className="musiccontroller">
