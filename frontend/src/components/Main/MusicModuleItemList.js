@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MusicModuleItem from './MusicModuleItem';
+import { SERVER_IP } from '../../const';
 import axios from 'axios';
 
 const MusicModuleItemList = ({ tag }) => {
@@ -7,14 +8,14 @@ const MusicModuleItemList = ({ tag }) => {
 
   useEffect(() => {
     const loadMusics = async () => {
-      const nameURL = `http://34.64.252.200/api/tracks/genre/${tag}`;
-      const res = await axios(nameURL);
-      setMusics(res.data);
+      const res = await axios(`${SERVER_IP}/api/tracks/genre/${tag}`);
+      const { code, tracks } = res.data;
+      setMusics(tracks);
     };
     loadMusics();
   }, []);
 
-  if (musics.length == 0) return <div>없음</div>;
+  if (musics.length === 0) return <div>로딩중</div>;
   return (
     <ul className="musicmodule__itemlist">
       {musics.map((music) => (
