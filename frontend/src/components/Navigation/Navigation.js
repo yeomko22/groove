@@ -10,8 +10,8 @@ const Navigation = () => {
       <nav className="nav">
         <h1 className="nav__title">Groove</h1>
         <Search />
-        <Upload />
-        <Profile />
+        {/* <Upload />
+        <Profile /> */}
       </nav>
     </div>
   );
