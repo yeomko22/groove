@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MusicModuleItem from './MusicModuleItem';
-import { SERVER_IP } from '../../const';
+import { SERVER_IP } from '../../utils/const';
 import axios from 'axios';
 
 const MusicModuleItemList = ({ category, specificCategory }) => {

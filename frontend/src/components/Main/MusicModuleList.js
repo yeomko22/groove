@@ -1,6 +1,6 @@
 import React from 'react';
 import MusicModule from './MusicModule';
-import { categoryObject } from '../../const';
+import { categoryObject } from '../../utils/const';
 
 const MusicModuleList = () => {
   const getCategory = () => {

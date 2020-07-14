@@ -1,45 +1,46 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import secToTimeFormat from '../../utils/secToTimeFormat';
 import MusicPlayerPlay from './MusicPlayerPlay';
 
-const MusicPlayerController = ({ audio, play, setPlay, TrackHls }) => {
-  const [time, setTime] = useState('00:00');
-  const [duration, setDuration] = useState('00:00');
-  const handleChange = (e) => {
-    console.log(e.target.value);
+const MusicPlayerController = ({
+  audio,
+  play,
+  setPlay,
+  time,
+  duration,
+  handleChangeTime,
+}) => {
+  const sliderRef = useRef();
+  const slider = sliderRef.current;
+  const [sliderPosition, setSliderPosition] = useState(0);
+
+  useEffect(() => {
+    if (slider !== null && slider !== undefined) {
+      setSliderPosition((time / duration) * 1000);
+    }
+  }, [time]);
+
+  const hadleSliderChange = (e) => {
+    const position = e.target.value;
+    setSliderPosition(position);
+    handleChangeTime((position * duration) / 1000);
   };
-
-  const formatTime = (time = 0, interval) => {
-    if (isNaN(time)) time = 0;
-    const sec_num = parseInt(time, 10); // don't forget the second param
-    let hours = Math.floor(sec_num / 3600);
-    let minutes = Math.floor((sec_num - hours * 3600) / 60);
-    let seconds = sec_num - hours * 3600 - minutes * 60;
-
-    if (hours < 10) hours = '0' + hours;
-    if (minutes < 10) minutes = '0' + minutes;
-    if (seconds < 10) seconds = '0' + seconds;
-
-    if (hours == '00') return minutes + ':' + seconds;
-    return hours + ':' + minutes + ':' + seconds;
-  };
-
-  const interval = setInterval(() => {
-    setTime(formatTime(audio?.currentTime));
-    setDuration(formatTime(audio?.duration));
-  }, 1000);
-  console.log(time);
-  if (!play) clearInterval(interval);
 
   return (
     <div className="musiccontroller">
       <div className="musiccontroller__container">
         <MusicPlayerPlay audio={audio} play={play} setPlay={setPlay} />
-        <span>{`${time}/${duration}`}</span>
+        <span>{`${secToTimeFormat(time)}`}</span>
         <input
           className="musiccontroller__musicslider"
           type="range"
-          onChange={handleChange}
+          ref={sliderRef}
+          min={0}
+          max={1000}
+          value={sliderPosition}
+          onChange={hadleSliderChange}
         />
+        <span>{`${secToTimeFormat(duration)}`}</span>
       </div>
     </div>
   );
