@@ -3,13 +3,15 @@ import MusicModuleItem from './MusicModuleItem';
 import { SERVER_IP } from '../../const';
 import axios from 'axios';
 
-const MusicModuleItemList = ({ tag }) => {
+const MusicModuleItemList = ({ category, specificCategory }) => {
   const [musics, setMusics] = useState([]);
 
   useEffect(() => {
     const loadMusics = async () => {
-      const res = await axios(`${SERVER_IP}/api/tracks/genre/${tag}`);
-      const { code, tracks } = res.data;
+      const res = await axios(
+        `${SERVER_IP}/api/tracks/${category}/${specificCategory}`,
+      );
+      const { tracks } = res.data;
       setMusics(tracks);
     };
     loadMusics();
