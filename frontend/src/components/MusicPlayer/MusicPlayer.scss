@@ -100,28 +100,43 @@ $font-size-xsmall: 0.7rem;
     right: 0;
   }
 
-  input[type='range'] {
-    -webkit-appearance: none;
-    width: 100%;
-    background-color: rgba($color-white, 0.9);
-    height: 0.3rem;
-    transition: all 0.5s;
-    cursor: pointer;
+  $slider-height: 0.3rem;
 
-    &:focus {
-      outline: none;
-    }
+  &__musicslider {
+    transition: all 0.5s;
+    background-color: $color-white;
+    height: $slider-height;
 
     &:hover {
-      transform: scaleY(3);
+      transform: scaleY(2);
     }
 
-    &::-webkit-slider-thumb {
+    &--progressbar {
+      height: $slider-height;
+      width: 1px;
+      background-color: $color-purple;
+      position: absolute;
+    }
+
+    input[type='range'] {
+      position: absolute;
       -webkit-appearance: none;
-      width: 1rem;
-      height: 0.3rem;
-      background: rgba($color-purple, 0.8);
+      width: 100%;
+      height: $slider-height;
       cursor: pointer;
+      background-color: transparent;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 1px;
+        height: $slider-height;
+        background: transparent;
+        cursor: pointer;
+      }
     }
   }
 }
