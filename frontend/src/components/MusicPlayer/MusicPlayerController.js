@@ -16,7 +16,7 @@ const MusicPlayerController = ({
   const [sliderPosition, setSliderPosition] = useState(0);
 
   useEffect(() => {
-    if (!(duration === 0 || isNaN(duration)))
+    if (!(duration === 0 || isNaN(duration)) && play)
       setSliderPosition((time / duration) * 500);
   }, [time]);
 
