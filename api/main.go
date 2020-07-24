@@ -32,7 +32,7 @@ func main() {
 	Network.DB.AutoMigrate(&Models.User{})
 	Network.DB.AutoMigrate(&Models.Track{})
 	Network.DB.AutoMigrate(&Models.Tag{})
-	Network.DB.Model(&Models.Tag{}).AddForeignKey("tag_track_id", "tracks(track_id)", "RESTRICT", "RESTRICT")
+	Network.DB.AutoMigrate(&Models.Comment{})
 
 	r := Routes.SetUpRouter()
 	r.Use(cors.Default())
