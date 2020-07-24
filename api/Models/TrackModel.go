@@ -113,9 +113,9 @@ func GetTrackHottest(tracks *[]Track) (err error) {
 // 1: newest track
 // 2: most liked
 // 3: most played
-func GetTrackByUser(tracks *[]Track, userId string, pageInfo PageInfo) (err error) {
+func GetTrackByUser(tracks *[]Track, userId string, option, limit, offset int) (err error) {
 	var order string
-	switch pageInfo.Option {
+	switch option {
 	case 1:
 		order = "created_at desc"
 	case 2:
@@ -126,9 +126,20 @@ func GetTrackByUser(tracks *[]Track, userId string, pageInfo PageInfo) (err erro
 	err = Network.DB.Table("tracks").
 		Where("track_user_id = ?", userId).
 		Order(order).
-		Offset(10 * pageInfo.Page).
-		Limit(10).
+		Offset(offset).
+		Limit(limit).
 		Find(tracks).
+		Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func GetTrackByUserCount(count *int, userId string) (err error) {
+	err = Network.DB.Table("tracks").
+		Where("track_user_id = ?", userId).
+		Count(count).
 		Error
 	if err != nil {
 		return err

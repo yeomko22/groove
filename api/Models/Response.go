@@ -24,6 +24,26 @@ func NewTracksResponse(code int, tracks []Track) TracksResponse {
 	return response
 }
 
+type TracksByUserResponse struct {
+	Code    int     `json:"code"`
+	Limit   int     `json:"limit"`
+	Offset  int     `json:"offset"`
+	Option  int     `json:"option"`
+	NextUrl string  `json:"next_url"`
+	Tracks  []Track `json:"tracks"`
+}
+
+func NewTracksByUserResponse(code int, tracks []Track, limit, offset, option int, nextUrl string) TracksByUserResponse {
+	var response TracksByUserResponse
+	response.Code = code
+	response.Tracks = tracks
+	response.Limit = limit
+	response.Offset = offset
+	response.Option = option
+	response.NextUrl = nextUrl
+	return response
+}
+
 type GenresResponse struct {
 	Code   int     `json:"code"`
 	Genres []Genre `json:"genres"`
