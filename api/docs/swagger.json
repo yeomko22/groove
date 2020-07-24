@@ -26,6 +26,38 @@
                 }
             }
         },
+        "/comments/:trackId": {
+            "get": {
+                "description": "특정 트랙의 댓글을 페이징 처리해서 읽어옴",
+                "tags": [
+                    "comments"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "한번에 몇개의 댓글을 읽어올 것인가(페이지 크기)",
+                        "name": "limit",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "몇 번 댓글부터 시작할 것인가(페이지 번호)",
+                        "name": "offset",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Models.CommentResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/tags/": {
             "get": {
                 "description": "전체 태그들을 속한 트랙 수가 많은 순으로 읽어옴",
@@ -261,6 +293,49 @@
         }
     },
     "definitions": {
+        "Models.CommentPagination": {
+            "type": "object",
+            "properties": {
+                "comment_body": {
+                    "type": "string"
+                },
+                "comment_uploader_id": {
+                    "type": "string"
+                },
+                "comment_uploader_profile": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "Models.CommentResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "comments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Models.CommentPagination"
+                    }
+                },
+                "count": {
+                    "type": "integer"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "next_url": {
+                    "type": "string"
+                },
+                "offset": {
+                    "type": "integer"
+                }
+            }
+        },
         "Models.Genre": {
             "type": "object",
             "properties": {
@@ -328,6 +403,12 @@
                 "trackUserName": {
                     "type": "string"
                 },
+                "trackUserProfile": {
+                    "type": "string"
+                },
+                "trackUserProfileThumbnail": {
+                    "type": "string"
+                },
                 "trackUserSid": {
                     "type": "string"
                 }
@@ -390,6 +471,9 @@
                     "type": "string"
                 },
                 "userSid": {
+                    "type": "integer"
+                },
+                "userType": {
                     "type": "integer"
                 }
             }

@@ -1,5 +1,33 @@
 basePath: /api
 definitions:
+  Models.CommentPagination:
+    properties:
+      comment_body:
+        type: string
+      comment_uploader_id:
+        type: string
+      comment_uploader_profile:
+        type: string
+      created_at:
+        type: string
+    type: object
+  Models.CommentResponse:
+    properties:
+      code:
+        type: integer
+      comments:
+        items:
+          $ref: '#/definitions/Models.CommentPagination'
+        type: array
+      count:
+        type: integer
+      limit:
+        type: integer
+      next_url:
+        type: string
+      offset:
+        type: integer
+    type: object
   Models.Genre:
     properties:
       cnt:
@@ -44,6 +72,10 @@ definitions:
         type: string
       trackUserName:
         type: string
+      trackUserProfile:
+        type: string
+      trackUserProfileThumbnail:
+        type: string
       trackUserSid:
         type: string
     type: object
@@ -86,6 +118,8 @@ definitions:
         type: string
       userSid:
         type: integer
+      userType:
+        type: integer
     type: object
   Models.UserResponse:
     properties:
@@ -113,6 +147,27 @@ paths:
         "200": {}
       tags:
       - healthcheck
+  /comments/:trackId:
+    get:
+      description: 특정 트랙의 댓글을 페이징 처리해서 읽어옴
+      parameters:
+      - description: 한번에 몇개의 댓글을 읽어올 것인가(페이지 크기)
+        in: path
+        name: limit
+        required: true
+        type: string
+      - description: 몇 번 댓글부터 시작할 것인가(페이지 번호)
+        in: path
+        name: offset
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Models.CommentResponse'
+      tags:
+      - comments
   /tags/:
     get:
       description: 전체 태그들을 속한 트랙 수가 많은 순으로 읽어옴

@@ -59,3 +59,23 @@ func NewUserResponse(code int, user User) UserResponse {
 	response.User = user
 	return response
 }
+
+type CommentResponse struct {
+	Code     int                 `json:"code"`
+	Count    int                 `json:"count"`
+	Limit    int                 `json:"limit"`
+	Offset   int                 `json:"offset"`
+	Comments []CommentPagination `json:"comments"`
+	NextUrl  string              `json:"next_url"`
+}
+
+func NewCommentResponse(code, count, limit, offset int, comments []CommentPagination, nextUrl string) CommentResponse {
+	var response CommentResponse
+	response.Code = code
+	response.Count = count
+	response.Limit = limit
+	response.Offset = offset
+	response.Comments = comments
+	response.NextUrl = nextUrl
+	return response
+}

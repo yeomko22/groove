@@ -17,6 +17,7 @@ type User struct {
 	UserProfileThumbnail string `gorm:"type:varchar(1024);default:''"`
 	UserBanner           string `gorm:"type:varchar(1024);default:''"`
 	UserSid              int    `gorm:"unique;type:int"`
+	UserType             int    `gorm:"type:int;default:0"`
 }
 
 func GetAllUsers(user *[]User) (err error) {
