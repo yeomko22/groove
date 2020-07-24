@@ -263,13 +263,19 @@ var doc = `{
                         "type": "integer",
                         "description": "1|2|3, 어떤 기준으로 트랙을 읽어올 것인가, 기본값 1",
                         "name": "option",
-                        "in": "query"
+                        "in": "path"
                     },
                     {
                         "type": "integer",
-                        "description": "10개 단위로 페이징 처리, 몇 번째 페이지를 읽어올 것인가, 기본값 0",
-                        "name": "page",
-                        "in": "query"
+                        "description": "한번에 몇개의 트랙 정보를 가져올 것인가, 기본값 10",
+                        "name": "limit",
+                        "in": "path"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "몇번째 트랙부터 정보를 가져올 것이가, 기본값 0",
+                        "name": "offset",
+                        "in": "path"
                     }
                 ],
                 "responses": {

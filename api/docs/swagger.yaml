@@ -287,12 +287,16 @@ paths:
         required: true
         type: string
       - description: 1|2|3, 어떤 기준으로 트랙을 읽어올 것인가, 기본값 1
-        in: query
+        in: path
         name: option
         type: integer
-      - description: 10개 단위로 페이징 처리, 몇 번째 페이지를 읽어올 것인가, 기본값 0
-        in: query
-        name: page
+      - description: 한번에 몇개의 트랙 정보를 가져올 것인가, 기본값 10
+        in: path
+        name: limit
+        type: integer
+      - description: 몇번째 트랙부터 정보를 가져올 것이가, 기본값 0
+        in: path
+        name: offset
         type: integer
       responses:
         "200":
