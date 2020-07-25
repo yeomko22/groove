@@ -1,10 +1,14 @@
-$color-red: #f00;
-$color-green: #0f0;
 $color-purple: purple;
 $color-blue: #00f;
 $color-navy: rgb(1, 1, 95);
 $color-dark: #333;
 $color-light: #eee;
+$main-gradient: linear-gradient(
+  0.25turn,
+  $color-purple,
+  $color-blue,
+  $color-navy
+);
 
 $font-size-mid: 1.2rem;
 $font-size-small: 0.8rem;
@@ -16,12 +20,7 @@ $font-size-small: 0.8rem;
 
 .nav-container {
   width: 100%;
-  background: linear-gradient(
-    0.25turn,
-    $color-purple,
-    $color-blue,
-    $color-navy
-  );
+  background: $main-gradient;
 }
 
 .nav {

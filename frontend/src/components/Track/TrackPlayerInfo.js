@@ -5,13 +5,11 @@ const TrackPlayerInfo = ({ track }) => {
   console.log(track);
   const { TrackUserName, TrackTitle, TrackHls } = track;
   return (
-    <div className="trackplayer__container__info">
+    <div className="trackplayer__info">
       <TrackPlayerButton track={track} />
       <div>
-        <div className="trackplayer__container__info--text">
-          {TrackUserName}
-        </div>
-        <div className="trackplayer__container__info--text">{TrackTitle}</div>
+        <div className="trackplayer__info--text">{TrackUserName}</div>
+        <div className="trackplayer__info--text">{TrackTitle}</div>
       </div>
     </div>
   );

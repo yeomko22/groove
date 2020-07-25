@@ -4,6 +4,7 @@ import { SERVER_IP } from '../../utils/const';
 import axios from 'axios';
 import TrackPlayerContainer from './TrackPlayerContainer';
 import './TrackMain.scss';
+import TrackBoardContainer from './TrackBoardContainer';
 
 const TrackMain = () => {
   const { trackID } = useParams();
@@ -22,6 +23,7 @@ const TrackMain = () => {
   return (
     <section className="track">
       <TrackPlayerContainer track={track} />
+      <TrackBoardContainer track={track} />
     </section>
   );
 };

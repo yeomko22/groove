@@ -13,15 +13,17 @@ function App() {
   return (
     <MusicProvider>
       <Navigation />
-      <Switch>
-        <Route path="/:user/:trackID">
-          <TrackMain />
-        </Route>
-        <Route path="/:user">트랙</Route>
-        <Route path="/">
-          <Main />
-        </Route>
-      </Switch>
+      <div className="section__container">
+        <Switch>
+          <Route path="/:user/:trackID">
+            <TrackMain />
+          </Route>
+          <Route path="/:user">트랙</Route>
+          <Route path="/">
+            <Main />
+          </Route>
+        </Switch>
+      </div>
       <MusicPlayer />
     </MusicProvider>
   );

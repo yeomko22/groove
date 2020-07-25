@@ -8,15 +8,19 @@ $color-light: rgb(246, 245, 245);
 $text-margin: 0.5rem 0;
 $text-padding: 0.1rem 0.5rem;
 
+$user-profile-size: 7rem;
+
 .track {
   width: 70%;
   margin: 0 auto;
+  & > * {
+    padding: 1rem;
+  }
 }
 
-.trackplayer__container {
+.trackplayer {
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
   background-color: $color-light;
   &__info {
     display: flex;
@@ -43,5 +47,55 @@ $text-padding: 0.1rem 0.5rem;
 
   &__image {
     width: 15rem;
+  }
+}
+
+.trackboard {
+  margin-top: 0.2rem;
+  display: flex;
+
+  &__info {
+    margin-right: 0.5rem;
+
+    &--image {
+      width: $user-profile-size;
+      clip-path: circle();
+    }
+  }
+
+  &__board {
+    &__description {
+      white-space: pre-line;
+    }
+
+    &__comment {
+      border: 0.1rem solid $color-light;
+      border-radius: 0.5rem;
+      display: flex;
+      margin: 0.5rem 0;
+      & > * {
+        margin: 0.5rem;
+      }
+
+      &--image {
+        clip-path: circle();
+        width: 5%;
+      }
+      &--body {
+        width: 85%;
+      }
+      &--created {
+        width: 10%;
+      }
+      &--commentbutton {
+        width: 100%;
+        border: none;
+        background: $color-purple;
+        border-radius: 1rem;
+        padding: 0.5rem;
+        color: $color-light;
+        cursor: pointer;
+      }
+    }
   }
 }

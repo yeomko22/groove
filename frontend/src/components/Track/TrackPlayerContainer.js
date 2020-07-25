@@ -6,10 +6,10 @@ const TrackPlayer = ({ track }) => {
   const { TrackArtwork } = track;
 
   return (
-    <div className="trackplayer__container">
+    <article className="trackplayer">
       <TrackPlayerInfo track={track} />
       <TrackImage trackImageURL={TrackArtwork} />
-    </div>
+    </article>
   );
 };
 

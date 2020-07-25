@@ -13,24 +13,11 @@ const TrackPlayerButton = ({ track }) => {
 
   if (musicInfo.TrackHls !== TrackHls)
     return (
-      <Play
-        className="trackplayer__container__info--button"
-        onClick={playNewMusic}
-      />
+      <Play className="trackplayer__info--button" onClick={playNewMusic} />
     );
   if (isPlaying)
-    return (
-      <Pause
-        className="trackplayer__container__info--button"
-        onClick={togglePlay}
-      />
-    );
-  return (
-    <Play
-      className="trackplayer__container__info--button"
-      onClick={togglePlay}
-    />
-  );
+    return <Pause className="trackplayer__info--button" onClick={togglePlay} />;
+  return <Play className="trackplayer__info--button" onClick={togglePlay} />;
 };
 
 export default TrackPlayerButton;
