@@ -1,0 +1,47 @@
+$color-purple: rgb(57, 20, 219);
+$color-blue: #00f;
+$color-navy: rgb(1, 1, 95);
+$color-dark: #333;
+$color-grey: rgb(102, 101, 101);
+$color-light: rgb(246, 245, 245);
+
+$text-margin: 0.5rem 0;
+$text-padding: 0.1rem 0.5rem;
+
+.track {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.trackplayer__container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: $color-light;
+  &__info {
+    display: flex;
+
+    &--button {
+      font-size: 3rem;
+      margin: $text-margin;
+      padding: $text-padding;
+      color: $color-purple;
+      cursor: pointer;
+      background-color: white;
+      clip-path: circle();
+    }
+
+    &--text {
+      display: flex;
+      flex-direction: column;
+      background-color: $color-dark;
+      color: $color-light;
+      padding: $text-padding;
+      margin: $text-margin;
+    }
+  }
+
+  &__image {
+    width: 15rem;
+  }
+}

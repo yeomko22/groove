@@ -45,7 +45,7 @@ class MusicPlayer extends Component {
 
   componentDidUpdate(_, prevState) {
     const audio = this.audioRef.current;
-    const { music } = this.context;
+    const { music, musicDispatch } = this.context;
     const { musicInfo } = music;
     const { TrackHls } = musicInfo;
 
@@ -64,8 +64,14 @@ class MusicPlayer extends Component {
       this.setState({ trackHls: TrackHls });
       this.setState({ musicInfo: musicInfo });
     }
-    const { play } = this.state;
-    if (play) audio.play();
+    // const { play } = this.state;
+    const { isPlaying } = music;
+    // if (prevState.play !== play) {
+    //   if (isPlaying) audio.play();
+    //   else audio.pause();
+    //   musicDispatch({ type: 'togglePlay' });
+    // }
+    if (isPlaying) audio.play();
     else audio.pause();
   }
 

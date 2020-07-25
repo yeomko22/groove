@@ -9,11 +9,15 @@ const MusicModuleItem = ({ musicObj }) => {
     TrackTitle,
     TrackUserName,
     TrackUserProfile,
+    TrackId,
+    TrackUserId,
   } = musicObj;
   return (
     <li className="musicmodule__item">
       <MusicModuleItemImage
         artwork={TrackArtwork === '' ? TrackUserProfile : TrackArtwork}
+        trackid={TrackId}
+        trackuserid={TrackUserId}
       />
       <MusicModuleItemPlay musicInfo={musicObj} />
       <MusicModuleItemSpec
