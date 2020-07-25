@@ -2,8 +2,7 @@ import React from 'react';
 import TrackPlayerButton from './TrackPlayerButton';
 
 const TrackPlayerInfo = ({ track }) => {
-  console.log(track);
-  const { TrackUserName, TrackTitle, TrackHls } = track;
+  const { TrackUserName, TrackTitle } = track;
   return (
     <div className="trackplayer__info">
       <TrackPlayerButton track={track} />

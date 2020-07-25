@@ -9,7 +9,6 @@ class MusicPlayer extends Component {
   constructor() {
     super();
     this.state = {
-      play: false,
       time: 0,
       duration: 0,
       trackHls: '',
@@ -17,18 +16,6 @@ class MusicPlayer extends Component {
     };
     this.audioRef = React.createRef();
   }
-
-  setPlay = (play) => {
-    this.setState({ play: play });
-  };
-
-  setTime = (time) => {
-    this.setState({ time: time });
-  };
-
-  setDuration = (duration) => {
-    this.setState({ duration: duration });
-  };
 
   handleChangeTime = (time) => {
     const audio = this.audioRef.current;
@@ -38,16 +25,17 @@ class MusicPlayer extends Component {
   componentDidMount() {
     const audio = this.audioRef.current;
     setInterval(() => {
-      this.setDuration(audio.duration);
-      this.setTime(audio.currentTime);
+      const { musicDispatch } = this.context;
+      musicDispatch({ type: 'setDuration', duration: audio.duration });
+      musicDispatch({ type: 'setTime', time: audio.currentTime });
     }, 1000);
   }
 
   componentDidUpdate(_, prevState) {
     const audio = this.audioRef.current;
-    const { music, musicDispatch } = this.context;
+    const { music } = this.context;
     const { musicInfo } = music;
-    const { TrackHls } = musicInfo;
+    const { TrackHls, time } = musicInfo;
 
     if (prevState.trackHls !== TrackHls) {
       if (Hls.isSupported()) {
@@ -57,40 +45,26 @@ class MusicPlayer extends Component {
           hls.loadSource(`${SERVER_IP}/hls/${TrackHls}/playlist.m3u8`);
           hls.on(Hls.Events.MANIFEST_PARSED, () => {
             audio.play();
-            this.setPlay(true);
           });
         });
       }
       this.setState({ trackHls: TrackHls });
       this.setState({ musicInfo: musicInfo });
     }
-    // const { play } = this.state;
+
     const { isPlaying } = music;
-    // if (prevState.play !== play) {
-    //   if (isPlaying) audio.play();
-    //   else audio.pause();
-    //   musicDispatch({ type: 'togglePlay' });
-    // }
     if (isPlaying) audio.play();
     else audio.pause();
   }
 
   render() {
     const audio = this.audioRef.current;
-    const { play, time, duration, musicInfo } = this.state;
-    const { TrackHls } = this.context.music.musicInfo;
     return (
       <>
         <audio ref={this.audioRef}></audio>
         <MusicPlayerController
           audio={audio}
-          play={play}
-          setPlay={this.setPlay}
-          TrackHls={TrackHls}
-          time={time}
-          duration={duration}
           handleChangeTime={this.handleChangeTime}
-          musicInfo={musicInfo}
         />
       </>
     );

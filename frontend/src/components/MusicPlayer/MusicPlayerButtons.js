@@ -9,13 +9,12 @@ import {
   FaSync as Rotate,
 } from 'react-icons/fa';
 
-const MusicPlayerButtons = ({ play, setPlay, isMusicSet }) => {
+const MusicPlayerButtons = ({ isMusicSet }) => {
   const { music, musicDispatch } = useContext(MusicContext);
   const { isPlaying } = music;
   const handleClick = () => {
     if (isMusicSet) return;
     musicDispatch({ type: 'togglePlay' });
-    setPlay(!play);
   };
 
   return (
