@@ -26,6 +26,7 @@ const TrackBoardCommentList = ({ trackid }) => {
 
   return (
     <>
+      <h3>Comments</h3>
       <ul>
         {commentList.map((comment, idx) => (
           <TrackBoardComment
