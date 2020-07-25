@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MusicContext } from '../../context/MusicContext';
 import {
   FaRandom as Randomize,
   FaPlay as Play,
@@ -9,17 +10,21 @@ import {
 } from 'react-icons/fa';
 
 const MusicPlayerButtons = ({ play, setPlay, isMusicSet }) => {
+  const { music, musicDispatch } = useContext(MusicContext);
+  const { isPlaying } = music;
   const handleClick = () => {
     if (isMusicSet) return;
+    musicDispatch({ type: 'togglePlay' });
     setPlay(!play);
   };
+
   return (
     <div className="musiccontroller__buttons">
       <Randomize />
       <Before />
       <div className="musiccontroller__buttons__play">
-        {play && <Pause onClick={handleClick} />}
-        {!play && <Play onClick={handleClick} />}
+        {isPlaying && <Pause onClick={handleClick} />}
+        {!isPlaying && <Play onClick={handleClick} />}
       </div>
       <Next />
       <Rotate />
