@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/yeomko22/groove/api/Models"
+	"github.com/yeomko22/groove/api/Utils"
 	"net/http"
 	"strconv"
 	"strings"
@@ -139,7 +140,8 @@ func GetTrackByUser(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
 	}
-	nextUrl := getNextUrl(userId, option, limit, offset, count)
+	url := fmt.Sprintf("/tracks/user/%s?option=%d&", userId, option)
+	nextUrl := Utils.GenNextUrl(url, count, limit, offset)
 	c.JSON(http.StatusOK,
 		Models.NewTracksByUserResponse(http.StatusOK, tracks, option, limit, offset, nextUrl))
 }
@@ -165,17 +167,4 @@ func IncreaseTrackField(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK,
 		Models.NewTrackResponse(http.StatusOK, track))
-}
-
-func getNextUrl(userId string, option, limit, offset, count int) string {
-	nextUrl := ""
-	if offset+limit < count {
-		newOffset := offset + limit
-		newLimit := limit
-		if count-newOffset < limit {
-			newLimit = count - newOffset
-		}
-		nextUrl = fmt.Sprintf("/tracks/user/%s?option=%d&limit=%d&offset=%d", userId, option, newOffset, newLimit)
-	}
-	return nextUrl
 }
