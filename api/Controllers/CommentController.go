@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/yeomko22/groove/api/Models"
+	"github.com/yeomko22/groove/api/Utils"
 	"net/http"
 	"strconv"
 )
@@ -34,19 +35,7 @@ func GetComment(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatus(http.StatusInternalServerError)
 	}
-	nextUrl := getNexturl(trackId, limit, offset, count)
+	url := fmt.Sprintf("comments/%s?", trackId)
+	nextUrl := Utils.GenNextUrl(url, count, limit, offset)
 	c.JSON(http.StatusOK, Models.NewCommentResponse(http.StatusOK, count, limit, offset, comments, nextUrl))
-}
-
-func getNexturl(trackId string, limit, offset, count int) string {
-	nextUrl := ""
-	if offset+limit < count {
-		newOffset := offset + limit
-		newLimit := 20
-		if count-newOffset < limit {
-			newLimit = count - newOffset
-		}
-		nextUrl = fmt.Sprintf("/comments/%s?limit=%d&offset=%d", trackId, newOffset, newLimit)
-	}
-	return nextUrl
 }
