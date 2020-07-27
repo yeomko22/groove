@@ -29,32 +29,10 @@ spec:
         image: yeomko/groove-api
         ports:
         - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: config-dev
         env:
-        - name: GIN_MODE
-          valueFrom:
-            configMapKeyRef:
-              name: config-dev
-              key: GIN_MODE
-        - name: GROOVE_DBHOST
-          valueFrom:
-            configMapKeyRef:
-              name: config-dev
-              key: GROOVE_DBHOST
-        - name: GROOVE_DBPORT
-          valueFrom:
-            configMapKeyRef:
-              name: config-dev
-              key: GROOVE_DBPORT
-        - name: GROOVE_DBUSER
-          valueFrom:
-            configMapKeyRef:
-              name: config-dev
-              key: GROOVE_DBUSER
-        - name: GROOVE_DBNAME
-          valueFrom:
-            configMapKeyRef:
-              name: config-dev
-              key: GROOVE_DBNAME
         - name: GROOVE_DBPASSWORD
           valueFrom:
             secretKeyRef:
