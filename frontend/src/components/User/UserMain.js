@@ -1,16 +1,16 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import UserProfileContainer from './UserProfileContainer';
-import UserTrackContainer from './UserTrackContainer';
+import UserTrackList from './UserTrackList';
 import './UserMain.scss';
 
 const UserMain = () => {
   const { user } = useParams();
   return (
-    <div className="user">
+    <section className="user">
       <UserProfileContainer uid={user} />
-      <UserTrackContainer uid={user} />
-    </div>
+      <UserTrackList uid={user} />
+    </section>
   );
 };
 
