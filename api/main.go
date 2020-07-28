@@ -33,6 +33,7 @@ func main() {
 	Network.DB.AutoMigrate(&Models.Track{})
 	Network.DB.AutoMigrate(&Models.Tag{})
 	Network.DB.AutoMigrate(&Models.Comment{})
+	Network.DB.AutoMigrate(&Models.Waveform{})
 
 	r := Routes.SetUpRouter()
 	r.Use(cors.Default())

@@ -47,6 +47,10 @@ func SetUpRouter() *gin.Engine {
 		{
 			grpComment.GET("/:trackId", Controllers.GetComment)
 		}
+		grpWaveform := v1.Group("/waveform")
+		{
+			grpWaveform.GET("/:trackId", Controllers.GetWaveform)
+		}
 	}
 	return r
 }
