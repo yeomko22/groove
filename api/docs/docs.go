@@ -312,6 +312,31 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/waveform/:trackId": {
+            "get": {
+                "description": "특정 트랙의 웨이브 폼 정보를 가져옴",
+                "tags": [
+                    "waveform"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "track_id",
+                        "name": "track_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Models.WaveformResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -509,6 +534,23 @@ var doc = `{
                 "user": {
                     "type": "object",
                     "$ref": "#/definitions/Models.User"
+                }
+            }
+        },
+        "Models.WaveformResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "track_id": {
+                    "type": "string"
+                },
+                "wave": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 }
             }
         }
