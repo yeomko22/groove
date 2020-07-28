@@ -8,7 +8,7 @@ const TrackPlayerInfo = ({ track }) => {
     <div className="trackplayer__info">
       <TrackPlayerButton track={track} />
       <div>
-        <div className="trackplayer__info--text">{TrackUserName}</div>
+        <h2 className="trackplayer__info--text">{TrackUserName}</h2>
         <div className="trackplayer__info--text">{TrackTitle}</div>
       </div>
     </div>

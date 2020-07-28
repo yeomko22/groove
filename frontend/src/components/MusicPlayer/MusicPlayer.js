@@ -63,6 +63,7 @@ class MusicPlayer extends Component {
       }
       this.setState({ trackHls: TrackHls });
       this.setState({ musicInfo: musicInfo });
+      console.dir(audio);
     }
     // const { play } = this.state;
     const { isPlaying } = music;
