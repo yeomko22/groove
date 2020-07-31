@@ -1,0 +1,18 @@
+$color-purple: rgb(57, 20, 219);
+$color-blue: #00f;
+$color-navy: rgb(1, 1, 95);
+$color-dark: #333;
+$color-grey: rgb(102, 101, 101);
+$color-light: rgb(246, 245, 245);
+
+.waveform {
+  display: flex;
+  align-items: flex-end;
+
+  &__stick {
+    width: 4px;
+    height: 10px;
+    background-color: $color-grey;
+    margin: 0 0.5px;
+  }
+}
