@@ -1,13 +1,16 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
+import { MusicContext } from '../../context/MusicContext';
 
-const MusicPlayerSlider = ({ time, duration, play, handleChangeTime }) => {
+const MusicPlayerSlider = ({ handleChangeTime }) => {
   const sliderRef = useRef();
   const playedRef = useRef();
   const [sliderPosition, setSliderPosition] = useState(0);
   const [sliderWidth, setSliderWidth] = useState(0);
+  const { music } = useContext(MusicContext);
+  const { isPlaying, time, duration } = music;
 
   useEffect(() => {
-    if (!(duration === 0 || isNaN(duration)) && play) {
+    if (!(duration === 0 || isNaN(duration)) && isPlaying) {
       setSliderWidth(playedRef.current.offsetParent.clientWidth);
       setSliderPosition((time / duration) * 500);
     }
