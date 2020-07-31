@@ -3,36 +3,44 @@ import './WaveFormMain.scss';
 import axios from 'axios';
 import { SERVER_IP } from '../../utils/const';
 import WaveFormStick from './WaveFormStick';
+import WaveFormTime from './WaveFormTime';
 
-const WaveFormMain = ({ trackid }) => {
+const WaveFormMain = ({ trackid, duration }) => {
   const [waves, setWaves] = useState([]);
-  const partial = 120;
+  const partial = 150;
 
   useEffect(() => {
     const getWave = async () => {
-      const { data } = await axios(`${SERVER_IP}/api/waveform/${trackid}`);
-      const { wave } = await data;
-      const waveLen = wave.length;
-      const interval = waveLen / partial;
-      const waves = [];
-
-      for (let i = 0; i < waveLen / interval; i++) {
-        const sliced = wave.slice(i * interval, i * interval + interval);
-        const sum = sliced.reduce((a, b) => a + b, 0);
-        const avg = sum / sliced.length;
-        waves.push(avg);
+      try {
+        const { data } = await axios(`${SERVER_IP}/api/waveform/${trackid}`);
+        const { wave } = await data;
+        const waveLen = wave.length;
+        const interval = waveLen / partial;
+        const waves = [];
+        for (let i = 0; i < waveLen / interval; i++)
+          waves.push(wave[parseInt(i * interval)]);
+        setWaves(waves);
+      } catch (e) {
+        setWaves([]);
       }
-
-      setWaves(waves);
     };
     if (trackid !== undefined) getWave();
   }, [trackid]);
 
   return (
     <div className="waveform">
-      {waves.map((height, idx) => (
-        <WaveFormStick key={idx} height={height} />
-      ))}
+      <div className="waveform__sticks">
+        {waves.map((height, idx) => (
+          <WaveFormStick
+            key={idx}
+            partial={partial}
+            idx={idx}
+            height={height}
+            trackid={trackid}
+          />
+        ))}
+      </div>
+      <WaveFormTime trackid={trackid} duration={duration} />
     </div>
   );
 };
