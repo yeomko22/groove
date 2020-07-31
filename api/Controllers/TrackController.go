@@ -1,9 +1,12 @@
 package Controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/yeomko22/groove/api/Models"
+	"github.com/yeomko22/groove/api/Utils"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -108,25 +111,39 @@ func GetTrackHottest(c *gin.Context) {
 // @Router /tracks/user/:userId [get]
 // @Description 특정 유저가 업로드한 트랙을 페이징 처리해서 읽어옴
 // @Param user_id path string true "user_id"
-// @Param option query int false "1|2|3, 어떤 기준으로 트랙을 읽어올 것인가, 기본값 1"
-// @Param page query int false "10개 단위로 페이징 처리, 몇 번째 페이지를 읽어올 것인가, 기본값 0"
+// @Param option path int false "1|2|3, 어떤 기준으로 트랙을 읽어올 것인가, 기본값 1"
+// @Param limit path int false "한번에 몇개의 트랙 정보를 가져올 것인가, 기본값 10"
+// @Param offset path int false "몇번째 트랙부터 정보를 가져올 것이가, 기본값 0"
 // @Success 200 {object} Models.TrackResponse
 // @Tags tracks
 func GetTrackByUser(c *gin.Context) {
 	userId := c.Param("userId")
-	pageInfo := Models.NewPageInfo()
-	err := c.BindJSON(&pageInfo)
+	option, err := strconv.Atoi(c.DefaultQuery("option", "1"))
 	if err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
-		return
+	}
+	limit, err := strconv.Atoi(c.DefaultQuery("limit", "10"))
+	if err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
+	}
+	offset, err := strconv.Atoi(c.DefaultQuery("offset", "0"))
+	if err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
 	}
 	var tracks []Models.Track
-	err = Models.GetTrackByUser(&tracks, userId, pageInfo)
+	err = Models.GetTrackByUser(&tracks, userId, option, limit, offset)
 	if err != nil {
-		c.AbortWithStatus(http.StatusNotFound)
-		return
+		c.AbortWithStatus(http.StatusInternalServerError)
 	}
-	c.JSON(http.StatusOK, tracks)
+	var count int
+	err = Models.GetTrackByUserCount(&count, userId)
+	if err != nil {
+		c.AbortWithStatus(http.StatusInternalServerError)
+	}
+	url := fmt.Sprintf("/tracks/user/%s?option=%d&", userId, option)
+	nextUrl := Utils.GenNextUrl(url, count, limit, offset)
+	c.JSON(http.StatusOK,
+		Models.NewTracksByUserResponse(http.StatusOK, tracks, option, limit, offset, nextUrl))
 }
 
 // @Router /tracks/increase [put]

@@ -42,6 +42,38 @@ var doc = `{
                 }
             }
         },
+        "/comments/:trackId": {
+            "get": {
+                "description": "특정 트랙의 댓글을 페이징 처리해서 읽어옴",
+                "tags": [
+                    "comments"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "한번에 몇개의 댓글을 읽어올 것인가(페이지 크기)",
+                        "name": "limit",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "몇 번 댓글부터 시작할 것인가(페이지 번호)",
+                        "name": "offset",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Models.CommentResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/tags/": {
             "get": {
                 "description": "전체 태그들을 속한 트랙 수가 많은 순으로 읽어옴",
@@ -231,13 +263,19 @@ var doc = `{
                         "type": "integer",
                         "description": "1|2|3, 어떤 기준으로 트랙을 읽어올 것인가, 기본값 1",
                         "name": "option",
-                        "in": "query"
+                        "in": "path"
                     },
                     {
                         "type": "integer",
-                        "description": "10개 단위로 페이징 처리, 몇 번째 페이지를 읽어올 것인가, 기본값 0",
-                        "name": "page",
-                        "in": "query"
+                        "description": "한번에 몇개의 트랙 정보를 가져올 것인가, 기본값 10",
+                        "name": "limit",
+                        "in": "path"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "몇번째 트랙부터 정보를 가져올 것이가, 기본값 0",
+                        "name": "offset",
+                        "in": "path"
                     }
                 ],
                 "responses": {
@@ -274,9 +312,77 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/waveform/:trackId": {
+            "get": {
+                "description": "특정 트랙의 웨이브 폼 정보를 가져옴",
+                "tags": [
+                    "waveform"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "track_id",
+                        "name": "track_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Models.WaveformResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "Models.CommentPagination": {
+            "type": "object",
+            "properties": {
+                "comment_body": {
+                    "type": "string"
+                },
+                "comment_uploader_id": {
+                    "type": "string"
+                },
+                "comment_uploader_profile": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "Models.CommentResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "comments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Models.CommentPagination"
+                    }
+                },
+                "count": {
+                    "type": "integer"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "next_url": {
+                    "type": "string"
+                },
+                "offset": {
+                    "type": "integer"
+                }
+            }
+        },
         "Models.Genre": {
             "type": "object",
             "properties": {
@@ -344,6 +450,12 @@ var doc = `{
                 "trackUserName": {
                     "type": "string"
                 },
+                "trackUserProfile": {
+                    "type": "string"
+                },
+                "trackUserProfileThumbnail": {
+                    "type": "string"
+                },
                 "trackUserSid": {
                     "type": "string"
                 }
@@ -407,6 +519,9 @@ var doc = `{
                 },
                 "userSid": {
                     "type": "integer"
+                },
+                "userType": {
+                    "type": "integer"
                 }
             }
         },
@@ -419,6 +534,23 @@ var doc = `{
                 "user": {
                     "type": "object",
                     "$ref": "#/definitions/Models.User"
+                }
+            }
+        },
+        "Models.WaveformResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "track_id": {
+                    "type": "string"
+                },
+                "wave": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 }
             }
         }

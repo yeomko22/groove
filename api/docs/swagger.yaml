@@ -1,5 +1,33 @@
 basePath: /api
 definitions:
+  Models.CommentPagination:
+    properties:
+      comment_body:
+        type: string
+      comment_uploader_id:
+        type: string
+      comment_uploader_profile:
+        type: string
+      created_at:
+        type: string
+    type: object
+  Models.CommentResponse:
+    properties:
+      code:
+        type: integer
+      comments:
+        items:
+          $ref: '#/definitions/Models.CommentPagination'
+        type: array
+      count:
+        type: integer
+      limit:
+        type: integer
+      next_url:
+        type: string
+      offset:
+        type: integer
+    type: object
   Models.Genre:
     properties:
       cnt:
@@ -44,6 +72,10 @@ definitions:
         type: string
       trackUserName:
         type: string
+      trackUserProfile:
+        type: string
+      trackUserProfileThumbnail:
+        type: string
       trackUserSid:
         type: string
     type: object
@@ -86,6 +118,8 @@ definitions:
         type: string
       userSid:
         type: integer
+      userType:
+        type: integer
     type: object
   Models.UserResponse:
     properties:
@@ -94,6 +128,17 @@ definitions:
       user:
         $ref: '#/definitions/Models.User'
         type: object
+    type: object
+  Models.WaveformResponse:
+    properties:
+      code:
+        type: integer
+      track_id:
+        type: string
+      wave:
+        items:
+          type: integer
+        type: array
     type: object
 info:
   contact:
@@ -113,6 +158,27 @@ paths:
         "200": {}
       tags:
       - healthcheck
+  /comments/:trackId:
+    get:
+      description: 특정 트랙의 댓글을 페이징 처리해서 읽어옴
+      parameters:
+      - description: 한번에 몇개의 댓글을 읽어올 것인가(페이지 크기)
+        in: path
+        name: limit
+        required: true
+        type: string
+      - description: 몇 번 댓글부터 시작할 것인가(페이지 번호)
+        in: path
+        name: offset
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Models.CommentResponse'
+      tags:
+      - comments
   /tags/:
     get:
       description: 전체 태그들을 속한 트랙 수가 많은 순으로 읽어옴
@@ -232,12 +298,16 @@ paths:
         required: true
         type: string
       - description: 1|2|3, 어떤 기준으로 트랙을 읽어올 것인가, 기본값 1
-        in: query
+        in: path
         name: option
         type: integer
-      - description: 10개 단위로 페이징 처리, 몇 번째 페이지를 읽어올 것인가, 기본값 0
-        in: query
-        name: page
+      - description: 한번에 몇개의 트랙 정보를 가져올 것인가, 기본값 10
+        in: path
+        name: limit
+        type: integer
+      - description: 몇번째 트랙부터 정보를 가져올 것이가, 기본값 0
+        in: path
+        name: offset
         type: integer
       responses:
         "200":
@@ -262,4 +332,20 @@ paths:
             $ref: '#/definitions/Models.UserResponse'
       tags:
       - users
+  /waveform/:trackId:
+    get:
+      description: 특정 트랙의 웨이브 폼 정보를 가져옴
+      parameters:
+      - description: track_id
+        in: path
+        name: track_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Models.WaveformResponse'
+      tags:
+      - waveform
 swagger: "2.0"

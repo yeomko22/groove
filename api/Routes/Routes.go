@@ -43,6 +43,14 @@ func SetUpRouter() *gin.Engine {
 		{
 			grpTag.GET("/", Controllers.GetTags)
 		}
+		grpComment := v1.Group("/comments")
+		{
+			grpComment.GET("/:trackId", Controllers.GetComment)
+		}
+		grpWaveform := v1.Group("/waveform")
+		{
+			grpWaveform.GET("/:trackId", Controllers.GetWaveform)
+		}
 	}
 	return r
 }
