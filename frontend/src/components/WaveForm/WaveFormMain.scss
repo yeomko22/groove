@@ -6,13 +6,21 @@ $color-grey: rgb(102, 101, 101);
 $color-light: rgb(246, 245, 245);
 
 .waveform {
-  display: flex;
-  align-items: flex-end;
+  padding: 1rem;
+
+  &__sticks {
+    display: flex;
+    align-items: flex-end;
+  }
 
   &__stick {
-    width: 4px;
-    height: 10px;
-    background-color: $color-grey;
+    width: 5px;
+    flex-grow: 1;
     margin: 0 0.5px;
+  }
+
+  &__time {
+    display: flex;
+    justify-content: space-between;
   }
 }
