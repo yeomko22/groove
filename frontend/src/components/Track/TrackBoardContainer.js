@@ -4,7 +4,6 @@ import TrackBoard from './TrackBoard';
 
 const TrackBoardContainer = ({ track }) => {
   const { TrackUserProfile, TrackUserName, TrackId, TrackDescription } = track;
-  console.log({ track });
   return (
     <article className="trackboard">
       <TrackBoardUserInfo

@@ -1,5 +1,10 @@
 package Models
 
+import (
+	"strconv"
+	"strings"
+)
+
 type TrackResponse struct {
 	Code  int   `json:"code"`
 	Track Track `json:"track"`
@@ -97,5 +102,25 @@ func NewCommentResponse(code, count, limit, offset int, comments []CommentPagina
 	response.Offset = offset
 	response.Comments = comments
 	response.NextUrl = nextUrl
+	return response
+}
+
+type WaveformResponse struct {
+	Code    int    `json:"code"`
+	TrackId string `json:"track_id"`
+	Wave    []int  `json:"wave"`
+}
+
+func NewWaveformResponse(code int, waveform Waveform) WaveformResponse {
+	var response WaveformResponse
+	response.Code = code
+	response.TrackId = waveform.WaveformTrackId
+	strArray := strings.Split(waveform.Waveform, "|")
+	var numArray []int
+	for _, v := range strArray {
+		i, _ := strconv.Atoi(v)
+		numArray = append(numArray, i)
+	}
+	response.Wave = numArray
 	return response
 }

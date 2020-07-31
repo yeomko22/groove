@@ -129,6 +129,17 @@ definitions:
         $ref: '#/definitions/Models.User'
         type: object
     type: object
+  Models.WaveformResponse:
+    properties:
+      code:
+        type: integer
+      track_id:
+        type: string
+      wave:
+        items:
+          type: integer
+        type: array
+    type: object
 info:
   contact:
     email: hjkim2246@gmail.com
@@ -321,4 +332,20 @@ paths:
             $ref: '#/definitions/Models.UserResponse'
       tags:
       - users
+  /waveform/:trackId:
+    get:
+      description: 특정 트랙의 웨이브 폼 정보를 가져옴
+      parameters:
+      - description: track_id
+        in: path
+        name: track_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Models.WaveformResponse'
+      tags:
+      - waveform
 swagger: "2.0"
