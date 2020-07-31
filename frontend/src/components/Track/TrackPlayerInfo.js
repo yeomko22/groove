@@ -9,8 +9,8 @@ const TrackPlayerInfo = ({ track }) => {
     <div className="trackplayer__info">
       <TrackPlayerButton track={track} />
       <div>
-        <div className="trackplayer__info--text">{TrackUserName}</div>
-        <div className="trackplayer__info--text">{TrackTitle}</div>
+        <span className="trackplayer__info--text">{TrackUserName}</span>
+        <span className="trackplayer__info--text">{TrackTitle}</span>
         <WaveFormMain trackid={TrackId} />
       </div>
     </div>
