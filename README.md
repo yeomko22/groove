@@ -1,6 +1,6 @@
 # groove
 [![Build Status](https://travis-ci.org/yeomko22/groove.svg?branch=dev)](https://travis-ci.org/yeomko22/groove)  
-음악 스트리밍 서비스 groove입니다. 
+음악 스트리밍 서비스 groove입니다.  
 배포 주소: https://groov.space
 ![groove_main](./docs/groove_main.png)
 
