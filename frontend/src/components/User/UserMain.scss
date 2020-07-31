@@ -9,93 +9,102 @@ $color-light: rgb(246, 245, 245);
 $content-width: 80%;
 
 .user {
-    width: $content-width;
-    margin: 0 auto;
+  width: $content-width;
+  margin: 0 auto;
 }
 
 .userprofile {
+  display: flex;
+  position: relative;
+
+  &__container {
+    position: absolute;
     display: flex;
-    position: relative;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+  }
 
-    &__container {
-        position: absolute;
-        display: flex;
-        height: 100%;
-        box-sizing: border-box;
-        padding: 1rem;
+  &__banner {
+    width: 100%;
+  }
+
+  &__image {
+    clip-path: circle();
+    height: 100%;
+  }
+
+  &__info {
+    &--text {
+      background-color: rgba(black, 0.8);
+      color: $color-light;
+      margin: 0.1rem 0.5rem;
+      padding: 0.1rem 0.5rem;
     }
-
-    &__banner {
-        width: 100%;
-    }
-
-    &__image {
-        clip-path: circle();
-        height: 100%;
-
-    }
-
-    &__info {
-        &--text {
-            background-color: rgba(black, 0.8);
-            color: $color-light;
-            margin: 0.1rem 0.5rem;
-            padding: 0.1rem 0.5rem;
-        }
-    }
+  }
 }
 
 .usertrack {
+  display: flex;
+  padding: 1rem;
+  background-color: $color-light;
+
+  &__container__left {
+    width: 15%;
+    position: relative;
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  &__container__right {
+    & > * {
+      margin: 0.3rem;
+    }
+    width: 85%;
+  }
+
+  &__top {
     display: flex;
-    padding: 1rem;
-    background-color: $color-light;
-    &__container {
-        width: 100%;
-        & > * {
-            margin: 0.3rem;
-        }
+
+    & * {
+      font-weight: normal;
     }
 
-    &__image {
-        width: 10rem;
+    &__playbutton {
+      color: $color-purple;
+      font-size: 2rem;
+      cursor: pointer;
+      margin: 0.5rem;
     }
 
-    &__top {
-        display: flex;
-
-        & * {
-            font-weight: normal;
-        }
-
-        &__playbutton {
-            color: $color-purple;
-            font-size: 2rem;
-            cursor: pointer;
-            margin: 0.5rem;
-        }
-
-        &--username {
-            color: $color-grey
-        }
+    &--username {
+      color: $color-grey;
     }
+  }
 
-    &__middle {
-        background-color: yellow;
-        width: 100%;
-    }
+  &__middle {
+    width: 100%;
+  }
 
-    &__bottom {
-        display: flex;
-        color: $color-light-grey;
-        font-size: 0.6rem;
-        &--liked {
-            border: 1px solid $color-light-grey;
-            border-radius: 10px;
-            padding: 0.3rem;
-            margin: 0.3rem;
-            &--icon {
-                color: $color-grey;
-            }
-        }
+  &__bottom {
+    display: flex;
+    color: $color-light-grey;
+    font-size: 0.6rem;
+    &--liked {
+      border: 1px solid $color-light-grey;
+      border-radius: 10px;
+      padding: 0.3rem;
+      margin: 0.3rem;
+      &--icon {
+        color: $color-grey;
+      }
     }
+  }
 }
