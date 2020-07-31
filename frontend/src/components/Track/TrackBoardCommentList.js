@@ -13,7 +13,7 @@ const TrackBoardCommentList = ({ trackid }) => {
     const { data } = await axios(nextURL);
     const { comments, next_url } = await data;
     setComments([...commentList, ...comments]);
-    setNextURL(next_url === '' ? '' : `${SERVER_IP}/api${next_url}`);
+    setNextURL(next_url === '' ? '' : `${SERVER_IP}/api/${next_url}`);
   };
 
   useEffect(() => {

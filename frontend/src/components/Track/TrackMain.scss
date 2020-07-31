@@ -5,101 +5,101 @@ $color-dark: #333;
 $color-grey: rgb(102, 101, 101);
 $color-light: rgb(246, 245, 245);
 
-$text-margin: 0.5rem 0;
+$text-margin: 0.1rem 0.5rem;
 $text-padding: 0.1rem 0.5rem;
 
 $user-profile-size: 7rem;
 
 .track {
-  width: 70%;
-  margin: 0 auto;
-  & > * {
-    padding: 1rem;
-  }
+    width: 80%;
+    margin: 0 auto;
+    & > * {
+        padding: 1rem;
+    }
 }
 
 .trackplayer {
-  display: flex;
-  justify-content: space-between;
-  background-color: $color-light;
-  border-bottom: 1px solid #eee;
-  &__info {
     display: flex;
+    justify-content: space-between;
+    background-color: $color-light;
+    border-bottom: 1px solid #eee;
+    &__info {
+        display: flex;
 
-    &--button {
-      font-size: 3rem;
-      margin: $text-margin;
-      padding: $text-padding;
-      color: $color-purple;
-      cursor: pointer;
-      background-color: white;
-      clip-path: circle();
+        &--button {
+            font-size: 3rem;
+            margin: $text-margin;
+            padding: $text-padding;
+            color: $color-purple;
+            cursor: pointer;
+            background-color: white;
+            clip-path: circle();
+        }
+
+        &--text {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(black, 0.8);
+            color: $color-light;
+            margin: 0.1rem 0.5rem;
+            padding: 0.1rem 0.5rem;
+        }
     }
 
-    &--text {
-      display: flex;
-      flex-direction: column;
-      background-color: $color-dark;
-      color: $color-light;
-      padding: $text-padding;
-      margin: $text-margin;
+    &__image {
+        width: 15rem;
     }
-  }
-
-  &__image {
-    width: 15rem;
-  }
 }
 
 .trackboard {
-  margin-top: 0.2rem;
-  display: flex;
+    margin-top: 0.2rem;
+    display: flex;
 
-  &__info {
-    margin-right: 0.5rem;
+    &__info {
+        margin-right: 0.5rem;
 
-    &--image {
-      width: $user-profile-size;
-      clip-path: circle();
-    }
-  }
-
-  &__board {
-    &__description {
-      white-space: pre-line;
-      margin-bottom: 1rem;
+        &--image {
+            width: $user-profile-size;
+            clip-path: circle();
+        }
     }
 
-    &__comment {
-      border: 0.1rem solid $color-light;
-      border-radius: 0.5rem;
-      display: flex;
-      align-items: flex-start;
-      margin: 0.5rem 0;
-      & > * {
-        margin: 0.5rem;
-      }
+    &__board {
+        &__description {
+            white-space: pre-line;
+            margin-bottom: 1rem;
+        }
 
-      &--image {
-        clip-path: circle();
-        width: 5%;
-      }
-      &--body {
-        width: 85%;
-        white-space: pre-line;
-      }
-      &--created {
-        width: 10%;
-      }
-      &--commentbutton {
-        width: 100%;
-        border: none;
-        background: $color-purple;
-        border-radius: 1rem;
-        padding: 0.5rem;
-        color: $color-light;
-        cursor: pointer;
-      }
+        &__comment {
+            border: 0.1rem solid $color-light;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            margin: 0.5rem 0;
+            & > * {
+                margin: 0.5rem;
+            }
+
+            &--image {
+                clip-path: circle();
+                width: 5%;
+            }
+            &--body {
+                width: 85%;
+                white-space: pre-line;
+            }
+            &--created {
+                width: 10%;
+            }
+            &--commentbutton {
+                width: 100%;
+                border: none;
+                background: $color-purple;
+                border-radius: 1rem;
+                padding: 0.5rem;
+                color: $color-light;
+                cursor: pointer;
+            }
+        }
     }
-  }
 }
