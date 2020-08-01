@@ -10,12 +10,10 @@ const MusicModuleItemSpec = ({
   return (
     <div className="musicmodule__item__spec">
       <Link to={`/${trackuserid}/${trackid}`}>
-        <div>{trackTitle}</div>
+        <div className="musicmodule__item__spec--title">{trackTitle}</div>
       </Link>
       <Link to={`/${trackuserid}`}>
-        <div className="musicmodule__item__spec--description">
-          {trackUsername}
-        </div>
+        <div className="musicmodule__item__spec--username">{trackUsername}</div>
       </Link>
     </div>
   );
