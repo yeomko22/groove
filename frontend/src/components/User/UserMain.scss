@@ -108,3 +108,10 @@ $content-width: 80%;
     }
   }
 }
+
+.link {
+  cursor: pointer;
+  &:hover {
+    color: darken($color-light, 50%);
+  }
+}
