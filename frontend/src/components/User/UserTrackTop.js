@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { FaPlayCircle as Play, FaPauseCircle as Pause } from 'react-icons/fa';
 import { MusicContext } from '../../context/MusicContext';
 
 const UserTrackTop = ({ trackInfo }) => {
-  const { TrackUserName, TrackTitle } = trackInfo;
+  const { TrackUserName, TrackTitle, TrackId } = trackInfo;
   const { musicDispatch } = useContext(MusicContext);
+  const { pathname } = useLocation();
 
   return (
     <li className="usertrack__top">
@@ -16,7 +18,9 @@ const UserTrackTop = ({ trackInfo }) => {
       />
       <div>
         <h4 className="usertrack__top--username">{TrackUserName}</h4>
-        <h3>{TrackTitle}</h3>
+        <Link to={`${pathname}/${TrackId}`}>
+          <h3 className="link">{TrackTitle}</h3>
+        </Link>
       </div>
     </li>
   );
