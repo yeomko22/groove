@@ -9,6 +9,7 @@ const WaveFormTime = ({ trackid, duration }) => {
 
   useEffect(() => {
     if (trackid === musicInfo.TrackId) setCurTime(time);
+    else setCurTime(0);
   }, [time]);
 
   return (
