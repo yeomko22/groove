@@ -21,7 +21,7 @@ $user-profile-size: 7rem;
 .trackplayer {
   display: flex;
   justify-content: space-between;
-  background-color: rgba($color-purple, 0.1);
+  background-color: $color-light;
   border-bottom: 1px solid #eee;
 
   &__infocontainer {
@@ -61,7 +61,7 @@ $user-profile-size: 7rem;
 
 .trackboard {
   display: flex;
-  background-color: rgba($color-light, 0.2);
+  background-color: rgba($color-light, 0.5);
 
   &__info {
     margin-right: 0.5rem;
