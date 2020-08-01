@@ -9,6 +9,7 @@ const WaveFormStick = ({ idx, height, partial, trackid }) => {
   useEffect(() => {
     if (trackid === musicInfo.TrackId && (time / duration) * partial > idx)
       setColor(`rgb(56, 20,${100 + idx})`);
+    else setColor('grey');
   }, [time]);
 
   return (
