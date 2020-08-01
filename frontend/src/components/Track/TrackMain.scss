@@ -111,3 +111,10 @@ $user-profile-size: 7rem;
     }
   }
 }
+
+.link {
+  cursor: pointer;
+  &:hover {
+    color: darken($color-light, 50%);
+  }
+}

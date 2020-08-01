@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const TrackBoardUserInfo = ({ userProfileImage, username }) => {
+const TrackBoardUserInfo = ({ userProfileImage, username, userid }) => {
   return (
     <div className="trackboard__info">
       <img src={userProfileImage} className="trackboard__info--image" />
-      <div>{username}</div>
+      <Link to={`/${userid}`} className="trackboard__info">
+        <div className="link">{username}</div>
+      </Link>
     </div>
   );
 };
