@@ -25,6 +25,7 @@ type Track struct {
 	TrackPermalink            string `gorm:"type:varchar(1024);default:''"`
 	TrackLikesCount           int    `gorm:"type:int;default:0"`
 	TrackPlaybackCount        int    `gorm:"type:int;default:0"`
+	TrackColor                string `gorm:"type:varchar(50);default:''"`
 }
 
 type Genre struct {
