@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import UserTrackImage from './UserTrackImage';
 import UserTrackTop from './UserTrackTop';
 import UserTrackMiddle from './UserTrackMiddle';

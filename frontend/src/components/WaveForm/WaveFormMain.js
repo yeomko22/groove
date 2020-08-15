@@ -6,8 +6,9 @@ import WaveFormStick from './WaveFormStick';
 import WaveFormTime from './WaveFormTime';
 
 const WaveFormMain = ({ trackid, duration }) => {
-  const [waves, setWaves] = useState([]);
   const partial = 150;
+  const emptyWaves = new Array(partial).fill(100);
+  const [waves, setWaves] = useState(emptyWaves);
 
   useEffect(() => {
     const getWave = async () => {
@@ -21,7 +22,7 @@ const WaveFormMain = ({ trackid, duration }) => {
           waves.push(wave[parseInt(i * interval)]);
         setWaves(waves);
       } catch (e) {
-        setWaves([]);
+        setWaves(emptyWaves);
       }
     };
     if (trackid !== undefined) getWave();
