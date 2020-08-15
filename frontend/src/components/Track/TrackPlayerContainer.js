@@ -1,18 +1,23 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import TrackImage from './TrackPlayerImage';
 import TrackPlayerInfo from './TrackPlayerInfo';
-import getTrackBackground from '../../utils/getTrackBackground';
+import { getBackgroundColor } from '../../utils/backgroundColor';
 
 const TrackPlayer = ({ track }) => {
-  const { TrackArtwork, TrackId } = track;
-  const trackPlayerRef = useRef();
+  const { TrackArtwork, TrackColor } = track;
+  const [colors, setColors] = useState([255, 255, 255]);
 
   useEffect(() => {
-    if (TrackId !== undefined) getTrackBackground(TrackId, trackPlayerRef);
-  }, [TrackId]);
+    if (TrackColor !== undefined) setColors(TrackColor.split('|'));
+  }, [TrackColor]);
 
   return (
-    <article ref={trackPlayerRef} className="trackplayer">
+    <article
+      className="trackplayer"
+      style={{
+        background: getBackgroundColor(colors),
+      }}
+    >
       <TrackPlayerInfo track={track} />
       <TrackImage trackImageURL={TrackArtwork} />
     </article>
